@@ -11,7 +11,7 @@ namespace wdfeerCrazyMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			Tooltip.SetDefault("Unlimited blade works\nNumber of Copper Shortswords increases after defeating EoC, BoC or Eoc, Skeletron");
+			Tooltip.SetDefault("Number of Copper Shortswords increases after defeating EoC, BoC or Eoc, Skeletron");
 		}
 		public override void SetDefaults()
 		{
@@ -20,7 +20,6 @@ namespace wdfeerCrazyMod.Items
 			Item.mana = 2;
 			Item.noMelee = true;
 			Item.useStyle = ItemUseStyleID.Shoot;
-			Item.scale = 0.5f;
 			Item.width = 56;
 			Item.height = 60;
 			Item.useTime = 13;
