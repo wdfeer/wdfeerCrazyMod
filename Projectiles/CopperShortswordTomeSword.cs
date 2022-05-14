@@ -9,14 +9,13 @@ using Terraria.ModLoader;
 
 namespace wdfeerCrazyMod.Projectiles
 {
-    internal class CopperShortsword : ModProjectile
+    internal class CopperShortswordTomeSword : ModProjectile
     {
         public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.CopperShortswordStab;
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("CopperShortsword");
         }
-
         public override void SetDefaults()
         {
             Projectile.DamageType = DamageClass.Magic;

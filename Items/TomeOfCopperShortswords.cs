@@ -25,12 +25,12 @@ namespace wdfeerCrazyMod.Items
 			Item.useTime = 13;
 			Item.useAnimation = 13;
 			Item.knockBack = 4;
-			Item.value = Item.buyPrice(gold: 5);
+			Item.value = Item.buyPrice(silver: 50);
 			Item.rare = 2;
 			Item.UseSound = SoundID.Item37.WithVolume(0.4f).WithPitchVariance(-0.2f);
 			Item.autoReuse = true;
 			Item.shootSpeed = 12;
-			Item.shoot = ModContent.ProjectileType<Projectiles.CopperShortsword>();
+			Item.shoot = ModContent.ProjectileType<Projectiles.CopperShortswordTomeSword>();
 		}
 
 		public override void AddRecipes()
