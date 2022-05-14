@@ -11,7 +11,7 @@ namespace wdfeerCrazyMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			Tooltip.SetDefault("Number of Copper Shortswords increases after defeating EoC, BoC or Eoc, Skeletron");
+			Tooltip.SetDefault("Number of Copper Shortswords and their damage increases after defeating EoC, BoC or Eoc, Skeletron");
 		}
 		public override void SetDefaults()
 		{
@@ -51,10 +51,23 @@ namespace wdfeerCrazyMod.Items
 				result++;
 			return result;
         }
+		int GetExtraDamage()
+        {
+			int result = 0;
+			if (NPC.downedSlimeKing)
+				result++;
+			if (NPC.downedBoss1)
+				result += 3;
+			if (NPC.downedBoss2)
+				result += 3;
+			if (NPC.downedBoss3)
+				result += 3;
+			return result;
+        }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
 			Vector2 target = Main.MouseWorld;
-
+			damage += GetExtraDamage();
 			int numOfSwords = GetNumberOfSwords();
             for (int i = 0; i < numOfSwords; i++)
             {
