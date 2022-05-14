@@ -12,6 +12,7 @@ namespace wdfeerCrazyMod.Projectiles
 {
     internal class CopperShortswordMouseControlled : ModProjectile
     {
+        public float speed = 8f;
         public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.CopperShortswordStab;
         public override void SetStaticDefaults()
         {
@@ -34,6 +35,30 @@ namespace wdfeerCrazyMod.Projectiles
             if (Projectile.timeLeft < 15)
             {
                 Projectile.alpha = 255 - (255 * Projectile.timeLeft / 15);
+            }
+
+            Player owner = Main.player[Projectile.owner];
+            if (owner.active && !owner.dead && owner.HeldItem.type == ModContent.ItemType<Items.CopperShortswordMouseControlled>())
+            {
+                Projectile.timeLeft = 15;
+                if (Main.myPlayer == owner.whoAmI)
+                {
+                    Vector2 diff = (Main.MouseWorld - Projectile.Center);
+                    if (diff.Length() > 45)
+                    {
+                        Projectile.velocity = speed * diff.SafeNormalize(Vector2.Zero);
+
+                        if (Main.netMode == NetmodeID.MultiplayerClient)
+                        {
+                            ModPacket packet = Mod.GetPacket();
+                            packet.Write((byte)MessageType.MouseControlledCopperShortsword);
+                            packet.Write(Projectile.whoAmI);
+                            packet.Write(Projectile.velocity.X);
+                            packet.Write(Projectile.velocity.Y);
+                            packet.Send();
+                        }
+                    }
+                }
             }
         }
     }

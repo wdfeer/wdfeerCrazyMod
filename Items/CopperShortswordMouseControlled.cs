@@ -38,11 +38,12 @@ namespace wdfeerCrazyMod.Items
 			recipe.AddTile(TileID.Anvils);
 			recipe.Register();
 		}
-		float projectileSpeed = 8;
 		Projectile projectile;
         public override void HoldItem(Player player)
         {
-            if (projectile == null || !projectile.active)
+			if (Main.myPlayer != player.whoAmI)
+				return;
+            if (projectile == null || !projectile.active || projectile.type != ModContent.ProjectileType<Projectiles.CopperShortswordMouseControlled>() || projectile.owner != player.whoAmI)
             {
 				int projectileID = Projectile.NewProjectile(Item.GetSource_ItemUse(Item),
                                           Main.MouseWorld,
@@ -52,13 +53,6 @@ namespace wdfeerCrazyMod.Items
                                           Item.knockBack,
 										  player.whoAmI);
 				projectile = Main.projectile[projectileID];
-            }
-            else
-            {
-				projectile.timeLeft = 15;
-				Vector2 diff = (Main.MouseWorld - projectile.Center);
-				if (diff.Length() > 45)
-					projectile.velocity = projectileSpeed * diff.SafeNormalize(Vector2.Zero);
             }
         }
     }
