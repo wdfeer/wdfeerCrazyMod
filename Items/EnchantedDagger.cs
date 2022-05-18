@@ -24,7 +24,7 @@ namespace wdfeerCrazyMod.Items
 			Item.scale = 0;
 			Item.useTime = 10;
 			Item.useAnimation = 10;
-			Item.knockBack = 4;
+			Item.knockBack = 1;
 			Item.value = Item.buyPrice(silver: 50);
 			Item.rare = 5;
 			Item.UseSound = SoundID.Item19;

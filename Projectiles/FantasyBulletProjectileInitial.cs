@@ -48,7 +48,9 @@ namespace wdfeerCrazyMod.Projectiles
                                                             Projectile.damage / 2,
                                                             Projectile.knockBack / 4,
                                                             Projectile.owner);
-                FantasyBulletProjectileSecond modProj = Main.projectile[projectileID].ModProjectile as FantasyBulletProjectileSecond;
+                Projectile projectile = Main.projectile[projectileID];
+                projectile.CritChance = Projectile.CritChance;
+                FantasyBulletProjectileSecond modProj = projectile.ModProjectile as FantasyBulletProjectileSecond;
                 modProj.target = target;
             }
         }

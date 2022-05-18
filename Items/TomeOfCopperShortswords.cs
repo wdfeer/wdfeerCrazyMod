@@ -80,6 +80,7 @@ namespace wdfeerCrazyMod.Items
 				int projectileID = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
 				Projectile projectile = Main.projectile[projectileID];
 				projectile.Center = position;
+				projectile.CritChance = player.GetWeaponCrit(Item);
 			}
 			return false;
 		}

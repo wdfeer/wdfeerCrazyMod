@@ -22,6 +22,7 @@ namespace wdfeerCrazyMod.Projectiles
         public override void SetDefaults()
         {
             baseTimeLeft = 480;
+            Projectile.timeLeft = baseTimeLeft;
             Projectile.width = 18;
             Projectile.height = 36;
             Projectile.DamageType = DamageClass.Ranged;
@@ -63,6 +64,7 @@ namespace wdfeerCrazyMod.Projectiles
                                                             Projectile.owner);
             arrow.usesLocalNPCImmunity = true;
             arrow.localNPCHitCooldown = -1;
+            arrow.CritChance = Projectile.CritChance;
         }
         private Vector2 GetTarget()
         {
