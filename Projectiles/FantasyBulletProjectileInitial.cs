@@ -35,7 +35,7 @@ namespace wdfeerCrazyMod.Projectiles
         int numOfProjectilesSpawnedOnHit = 6;
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            Vector2 launchVelocity = new Vector2(-6, 0); // Create a velocity moving the left.
+            Vector2 launchVelocity = new Vector2(10, 0);
             launchVelocity = launchVelocity.RotatedByRandom(MathHelper.Pi);
             for (int i = 0; i < numOfProjectilesSpawnedOnHit; i++)
             {
@@ -50,6 +50,13 @@ namespace wdfeerCrazyMod.Projectiles
                                                             Projectile.owner);
                 FantasyBulletProjectileSecond modProj = Main.projectile[projectileID].ModProjectile as FantasyBulletProjectileSecond;
                 modProj.target = target;
+            }
+        }
+        public override void Kill(int timeLeft)
+        {
+            for (int i = 0; i < 12; i++)
+            {
+                Dust d = Dust.NewDustPerfect(Projectile.position + Main.rand.NextVector2Circular(35,35), DustID.Smoke);
             }
         }
     }

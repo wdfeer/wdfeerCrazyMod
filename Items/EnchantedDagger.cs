@@ -15,10 +15,10 @@ namespace wdfeerCrazyMod.Items
 		}
 		public override void SetDefaults()
 		{
-			Item.damage = 32;
+			Item.damage = 39;
 			Item.crit = 12;
 			Item.DamageType = DamageClass.Magic;
-			Item.mana = 6;
+			Item.mana = 5;
 			Item.noMelee = true;
 			Item.useStyle = ItemUseStyleID.Swing;
 			Item.scale = 0;

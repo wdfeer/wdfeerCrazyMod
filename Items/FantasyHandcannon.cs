@@ -15,12 +15,12 @@ namespace wdfeerCrazyMod.Items
 		}
 		public override void SetDefaults()
 		{
-			Item.damage = 44;
+			Item.damage = 60;
 			Item.crit = 20;
 			Item.DamageType = DamageClass.Ranged;
 			Item.noMelee = true;
 			Item.useStyle = ItemUseStyleID.Shoot;
-			Item.scale = 0.7f;
+			Item.scale = 0.75f;
 			Item.useTime = 56;
 			Item.useAnimation = 56;
 			Item.knockBack = 9;

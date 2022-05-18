@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -21,7 +22,8 @@ namespace wdfeerCrazyMod.Projectiles
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ModContent.ProjectileType<FantasyBulletProjectileInitial>());
-            Projectile.timeLeft = 180;
+            Projectile.timeLeft = 240;
+            Projectile.extraUpdates = 1;
         }
         public override void AI()
         {
@@ -36,9 +38,32 @@ namespace wdfeerCrazyMod.Projectiles
         }
         public override bool? CanHitNPC(NPC target)
         {
-            if (Projectile.timeLeft > 160)
+            if (Projectile.timeLeft > 220)
                 return false;
             return base.CanHitNPC(target);
+        }
+        int ricochetTimesLeft = 3;
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            if (ricochetTimesLeft <= 0)
+                return true;
+            Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
+            SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
+
+            // If the projectile hits the left or right side of the tile, reverse the X velocity
+            if (Math.Abs(Projectile.velocity.X - oldVelocity.X) > float.Epsilon)
+            {
+                Projectile.velocity.X = -oldVelocity.X;
+            }
+
+            // If the projectile hits the top or bottom side of the tile, reverse the Y velocity
+            if (Math.Abs(Projectile.velocity.Y - oldVelocity.Y) > float.Epsilon)
+            {
+                Projectile.velocity.Y = -oldVelocity.Y;
+            }
+
+            ricochetTimesLeft--;
+            return false;
         }
     }
 }
