@@ -22,7 +22,7 @@ namespace wdfeerCrazyMod.Items
 
 		public override void SetDefaults()
 		{
-			Item.damage = 90;
+			Item.damage = 80;
 			Item.DamageType = DamageClass.Ranged;
 			Item.knockBack = 9f;
 			Item.width = 18;
@@ -31,23 +31,11 @@ namespace wdfeerCrazyMod.Items
 			Item.useAnimation = 48;
 			Item.scale = 0;
 			Item.useStyle = ItemUseStyleID.Swing; // how the player's arm moves when using the item
-			Item.value = Item.sellPrice(gold: 13);
+			Item.value = Item.sellPrice(gold: 15);
 			Item.rare = 5;
 			Item.UseSound = SoundID.Item1; // What sound should play when using the item
 			Item.shoot = ModContent.ProjectileType<AutobowProjectile>();
 			Item.shootSpeed = 10;
-		}
-		public override void AddRecipes()
-		{
-			Recipe recipe = CreateRecipe();
-			recipe.AddIngredient(ItemID.TitaniumBar, 15);
-			recipe.AddTile(TileID.MythrilAnvil);
-			recipe.Register();
-
-			recipe = CreateRecipe();
-			recipe.AddIngredient(ItemID.AdamantiteBar, 15);
-			recipe.AddTile(TileID.MythrilAnvil);
-			recipe.Register();
 		}
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
