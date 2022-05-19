@@ -29,13 +29,14 @@ namespace wdfeerCrazyMod.Projectiles
 		{
 			Projectile.width = 48;
 			Projectile.height = 36;
+			Projectile.scale = 0.6f;
 			Projectile.tileCollide = false; // Makes the minion go through tiles freely
 
 			// These below are needed for a minion weapon
 			Projectile.friendly = true; // Only controls if it deals damage to enemies on contact (more on that later)
 			Projectile.minion = true; // Declares this as a minion (has many effects)
 			Projectile.DamageType = DamageClass.Summon; // Declares the damage type (needed for it to deal damage)
-			Projectile.minionSlots = 1f; // Amount of slots this minion occupies from the total minion slots available to the player (more on that later)
+			Projectile.minionSlots = 2.5f; // Amount of slots this minion occupies from the total minion slots available to the player (more on that later)
 			Projectile.penetrate = -1; // Needed so the minion doesn't despawn on collision with enemies or tiles
 		}
 
@@ -91,7 +92,8 @@ namespace wdfeerCrazyMod.Projectiles
 								.Where(proj => proj.active && proj.type == Projectile.type && proj.owner == Projectile.owner)
 								.Select(proj => proj.whoAmI)
 								.ToArray();
-
+			if (allUzis.Length == 0)
+				return;
 			Vector2 OwnerToIdlePosition = new Vector2(0, -48 * (float)Math.Sqrt(allUzis.Length));
 			
 			int myUziIndex = Array.IndexOf(allUzis, Projectile.whoAmI);
@@ -167,14 +169,24 @@ namespace wdfeerCrazyMod.Projectiles
 			{
 				Vector2 launchVelocity = Vector2.Normalize(toTarget) * 16;
 				Projectile proj = Projectile.NewProjectileDirect(Entity.InheritSource(Projectile), Projectile.Center, launchVelocity, ProjectileID.BulletHighVelocity, Projectile.damage, Projectile.knockBack, Projectile.owner);
-				proj.CritChance = Projectile.CritChance; 
+				proj.CritChance = Projectile.CritChance;
+				proj.DamageType = DamageClass.Summon;
 			}
 
 			attackTimer = 0;
 
 			SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
 
-			Projectile.rotation = (float)Math.Atan2(toTarget.Y, toTarget.X);
+			if (toTarget.X > 0)
+            {
+				Projectile.rotation = (float)Math.Atan2(toTarget.Y, toTarget.X);
+				Projectile.spriteDirection = 1;
+			} else if (toTarget.X < 0)
+            {
+				Projectile.rotation = (float)Math.Atan2(toTarget.Y, toTarget.X) + MathHelper.Pi;
+				Projectile.spriteDirection = -1;
+			}
+			
 		}
 		private void Visuals()
 		{

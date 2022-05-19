@@ -26,9 +26,9 @@ namespace wdfeerCrazyMod.Items
 
 		public override void SetDefaults()
 		{
-			Item.damage = 25;
+			Item.damage = 21;
 			Item.knockBack = 1f;
-			Item.mana = 14; // mana cost
+			Item.mana = 18; // mana cost
 			Item.useTime = 30;
 			Item.useAnimation = 30;
 			Item.scale = 0;
