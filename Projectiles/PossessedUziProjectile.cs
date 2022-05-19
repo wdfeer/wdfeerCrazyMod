@@ -62,7 +62,7 @@ namespace wdfeerCrazyMod.Projectiles
 				return;
 			}
 
-			GeneralBehavior(owner);
+			SetPositionNearTheOwner(owner);
 			SearchForTargets(owner, out bool foundTarget, out Vector2 targetCenter);
 			Attack(foundTarget, targetCenter);
 			Visuals();
@@ -86,20 +86,24 @@ namespace wdfeerCrazyMod.Projectiles
 			return true;
 		}
 
-		private void GeneralBehavior(Player owner)
+		private void SetPositionNearTheOwner(Player owner)
 		{
 			int[] allUzis = Main.projectile
 								.Where(proj => proj.active && proj.type == Projectile.type && proj.owner == Projectile.owner)
 								.Select(proj => proj.whoAmI)
 								.ToArray();
+			Vector2 ownerToIdlePosition;
 			if (allUzis.Length == 0)
 				return;
-			Vector2 OwnerToIdlePosition = new Vector2(0, -48 * (float)Math.Sqrt(allUzis.Length));
+			else if (allUzis.Length == 2)
+				ownerToIdlePosition = new Vector2(48 * (float)Math.Sqrt(allUzis.Length), 0);
+			else
+				ownerToIdlePosition = new Vector2(0, -48 * (float)Math.Sqrt(allUzis.Length));
 			
 			int myUziIndex = Array.IndexOf(allUzis, Projectile.whoAmI);
-			OwnerToIdlePosition = OwnerToIdlePosition.RotatedBy(MathHelper.ToRadians(360 / allUzis.Length * myUziIndex));
+			ownerToIdlePosition = ownerToIdlePosition.RotatedBy(MathHelper.ToRadians(360 / allUzis.Length * myUziIndex));
 
-			Projectile.position = owner.VisualPosition + OwnerToIdlePosition;
+			Projectile.position = owner.VisualPosition + ownerToIdlePosition;
 		}
 		private void SearchForTargets(Player owner, out bool foundTarget, out Vector2 targetCenter)
 		{

@@ -17,7 +17,7 @@ namespace wdfeerCrazyMod.Items
         public override string Texture => "Terraria/Images/Item_" + ItemID.Uzi;
         public override void SetStaticDefaults()
 		{
-			Tooltip.SetDefault("Summons a possessed uzi to fight for you");
+			Tooltip.SetDefault("Summons a possessed uzi to fight for you\nRequires 2.5 minion slots");
 
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 			ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
