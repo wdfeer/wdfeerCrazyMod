@@ -24,6 +24,7 @@ namespace wdfeerCrazyMod.Projectiles
             Projectile.CloneDefaults(ModContent.ProjectileType<FantasyBulletProjectileInitial>());
             Projectile.timeLeft = 240;
             Projectile.extraUpdates = 1;
+            Projectile.penetrate = 2;
         }
         public override void AI()
         {
@@ -42,7 +43,7 @@ namespace wdfeerCrazyMod.Projectiles
                 return false;
             return base.CanHitNPC(target);
         }
-        int ricochetTimesLeft = 3;
+        int ricochetTimesLeft = 5;
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             if (ricochetTimesLeft <= 0)
@@ -53,13 +54,13 @@ namespace wdfeerCrazyMod.Projectiles
             // If the projectile hits the left or right side of the tile, reverse the X velocity
             if (Math.Abs(Projectile.velocity.X - oldVelocity.X) > float.Epsilon)
             {
-                Projectile.velocity.X = -oldVelocity.X;
+                Projectile.velocity.X = -oldVelocity.X * 1.1f;
             }
 
             // If the projectile hits the top or bottom side of the tile, reverse the Y velocity
             if (Math.Abs(Projectile.velocity.Y - oldVelocity.Y) > float.Epsilon)
             {
-                Projectile.velocity.Y = -oldVelocity.Y;
+                Projectile.velocity.Y = -oldVelocity.Y * 1.1f;
             }
 
             ricochetTimesLeft--;

@@ -11,11 +11,11 @@ namespace wdfeerCrazyMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			Tooltip.SetDefault("Shoots fantasy bullets\nSuccessful hits spawn a swarm of fantasy bullets");
+			Tooltip.SetDefault("Shoots fantasy bullets\nSuccessful hits spawn a swarm of fantasy bullets, each dealing 40% damage");
 		}
 		public override void SetDefaults()
 		{
-			Item.damage = 60;
+			Item.damage = 88;
 			Item.crit = 20;
 			Item.DamageType = DamageClass.Ranged;
 			Item.noMelee = true;

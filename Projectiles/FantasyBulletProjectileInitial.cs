@@ -45,7 +45,7 @@ namespace wdfeerCrazyMod.Projectiles
                                                             Projectile.Center,
                                                             launchVelocity,
                                                             ModContent.ProjectileType<FantasyBulletProjectileSecond>(),
-                                                            Projectile.damage / 2,
+                                                            (int)(Projectile.damage * 0.4f),
                                                             Projectile.knockBack / 4,
                                                             Projectile.owner);
                 Projectile projectile = Main.projectile[projectileID];
