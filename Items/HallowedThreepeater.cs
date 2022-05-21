@@ -26,8 +26,11 @@ namespace wdfeerCrazyMod.Items
 			recipe.AddTile(TileID.MythrilAnvil);
 			recipe.Register();
 		}
-
-		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override Vector2? HoldoutOffset()
+        {
+			return new Vector2(-3, 0);
+        }
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
 			{ 
 				Vector2 muzzleOffset = velocity.SafeNormalize(Vector2.Zero) * Item.width;
