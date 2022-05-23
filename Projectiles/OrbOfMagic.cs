@@ -52,7 +52,7 @@ namespace wdfeerCrazyMod.Projectiles
 		{
 			return true;
 		}
-		int shootCounter = 0;
+		int shootCount = 0;
 		int shootCooldown = 20;
 		int shootTimer = 0;
 		public override void AI()
@@ -65,12 +65,15 @@ namespace wdfeerCrazyMod.Projectiles
 			}
 
 			GeneralBehavior(owner, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition);
-			SearchForTargets(owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter, out bool lineOfSight);
-			Movement(foundTarget, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
+			SearchForTargets(owner, out bool foundTarget, out float distanceFromTarget, out NPC target);
+			Movement(foundTarget, distanceFromTarget, foundTarget ? target.Center : Vector2.Zero, distanceToIdlePosition, vectorToIdlePosition);
 			shootTimer++;
-			if (foundTarget && shootTimer >= shootCooldown && lineOfSight)
+			if (foundTarget && shootTimer >= shootCooldown)
             {
-				Shoot(targetCenter);
+                for (int i = 0; i < shootTypes.Length; i++)
+                {
+					Shoot(target, 0.2f);
+				}
 				shootTimer = 0;
 			}
 			Visuals();
@@ -150,30 +153,26 @@ namespace wdfeerCrazyMod.Projectiles
 			}
 		}
 
-		private void SearchForTargets(Player owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter, out bool lineOfSight)
+		private void SearchForTargets(Player owner, out bool foundTarget, out float distanceFromTarget, out NPC target)
 		{
-			// Starting search distance
 			distanceFromTarget = 700f;
-			targetCenter = Projectile.position;
-			foundTarget = false;
-			lineOfSight = false;
+			target = null;
 
 			// This code is required if your minion weapon has the targeting feature
 			if (owner.HasMinionAttackTargetNPC)
 			{
 				NPC npc = Main.npc[owner.MinionAttackTargetNPC];
 				float between = Vector2.Distance(npc.Center, Projectile.Center);
-				lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
 				// Reasonable distance away so it doesn't target across multiple screens
 				if (between < 2000f)
 				{
 					distanceFromTarget = between;
-					targetCenter = npc.Center;
 					foundTarget = true;
+					target = npc;
 				}
 			}
 
-			if (!foundTarget)
+			if (target == null)
 			{
 				// This code is required either way, used for finding a target
 				for (int i = 0; i < Main.maxNPCs; i++)
@@ -183,23 +182,18 @@ namespace wdfeerCrazyMod.Projectiles
 					if (npc.CanBeChasedBy())
 					{
 						float between = Vector2.Distance(npc.Center, Projectile.Center);
-						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
+						bool closest = Vector2.Distance(Projectile.Center, npc.Center) > between;
 						bool inRange = between < distanceFromTarget;
-						lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
-						// Additional check for this specific minion behavior, otherwise it will stop attacking once it dashed through an enemy while flying though tiles afterwards
-						// The number depends on various parameters seen in the movement code below. Test different ones out until it works alright
-						bool closeThroughWall = between < 100f;
-
-						if (((closest && inRange) || !foundTarget) && (lineOfSight || closeThroughWall))
+						if ((closest && inRange) || target == null)
 						{
 							distanceFromTarget = between;
-							targetCenter = npc.Center;
+							target = npc;
 							foundTarget = true;
 						}
 					}
 				}
 			}
-
+			foundTarget = target != null;
 			Projectile.friendly = foundTarget;
 		}
 
@@ -267,23 +261,56 @@ namespace wdfeerCrazyMod.Projectiles
 				}
 			}
 		}
-		private void Shoot(Vector2 target)
+		int[] shootTypes = { ProjectileID.AmethystBolt, ProjectileID.SapphireBolt };
+		private void Shoot(NPC target, float selfKnockbackMult)
         {
-			int type = shootCounter % 2 == 0 ? ProjectileID.AmethystBolt : (shootCounter % 3 == 0 ? ProjectileID.SapphireBolt : ProjectileID.WaterBolt);
-			shootCounter++;
-			Vector2 launchVelocity = Vector2.Normalize(target - Projectile.Center) * 16;
+			shootTypes = new int[] { ProjectileID.AmethystBolt, ProjectileID.SapphireBolt };
+			int type = getCurrentProjectileType();
+			shootCount++;
+			int projectileSpeed = 16;
+
+			float distance = (target.Center - Projectile.Center).Length();
+			float framesToReachTarget = distance / projectileSpeed;
+			Vector2 estimatedFutureTargetPosition = EstimateNPCCenter(target, (int)framesToReachTarget);
+			Vector2 launchVelocity = Vector2.Normalize(estimatedFutureTargetPosition - Projectile.Center) * projectileSpeed;
+			Projectile proj = Fire(launchVelocity, type, Projectile.damage);
+			Projectile.velocity -= launchVelocity * selfKnockbackMult;
+
+			int getCurrentProjectileType()
+            {
+                for (int i = shootTypes.Length - 1; i >= 0; i--)
+                {
+					if (shootCount % (i + 1) == 0) { return shootTypes[i]; }
+                }
+				return 0;
+            }
+        }
+		private Vector2 EstimateNPCCenter(NPC npc, int time)
+        {
+			Vector2 center = npc.Center;
+			Vector2 velocity = npc.velocity;
+			Vector2 acceleration = velocity - npc.oldVelocity;
+            for (int i = 0; i < time; i++)
+            {
+				center += velocity;
+				velocity += acceleration;
+            }
+			return center;
+		}
+		private Projectile Fire(Vector2 velocity, int type, int damage)
+        {
 			Projectile proj = Projectile.NewProjectileDirect(Entity.InheritSource(Projectile),
-                                                    Projectile.Center,
-                                                    launchVelocity,
-                                                    type,
-                                                    Projectile.damage,
-                                                    Projectile.knockBack,
-                                                    Projectile.owner);
+													Projectile.Center,
+													velocity,
+													type,
+													damage,
+													0,
+													Projectile.owner);
 			proj.originalDamage = Projectile.originalDamage;
 			proj.DamageType = Projectile.DamageType;
-
-			Projectile.velocity -= launchVelocity / 2;
-        }
+			proj.tileCollide = false;
+			return proj;
+		}
 		float rotationDelta = 0f;
 		private void Visuals()
 		{
