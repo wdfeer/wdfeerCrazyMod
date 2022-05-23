@@ -27,9 +27,8 @@ namespace wdfeerCrazyMod.Projectiles
 		float passiveRotationMultiplier = 1;
 		public sealed override void SetDefaults()
 		{
-			Projectile.width = 48;
-			Projectile.height = 48;
-			Projectile.scale = 0.5f;
+			Projectile.width = 24;
+			Projectile.height = 24;
 			Projectile.tileCollide = false; // Makes the minion go through tiles freely
 
 			// These below are needed for a minion weapon
@@ -66,10 +65,10 @@ namespace wdfeerCrazyMod.Projectiles
 			}
 
 			GeneralBehavior(owner, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition);
-			SearchForTargets(owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter);
+			SearchForTargets(owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter, out bool lineOfSight);
 			Movement(foundTarget, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
 			shootTimer++;
-			if (foundTarget && shootTimer >= shootCooldown)
+			if (foundTarget && shootTimer >= shootCooldown && lineOfSight)
             {
 				Shoot(targetCenter);
 				shootTimer = 0;
@@ -151,19 +150,20 @@ namespace wdfeerCrazyMod.Projectiles
 			}
 		}
 
-		private void SearchForTargets(Player owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter)
+		private void SearchForTargets(Player owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter, out bool lineOfSight)
 		{
 			// Starting search distance
 			distanceFromTarget = 700f;
 			targetCenter = Projectile.position;
 			foundTarget = false;
+			lineOfSight = false;
 
 			// This code is required if your minion weapon has the targeting feature
 			if (owner.HasMinionAttackTargetNPC)
 			{
 				NPC npc = Main.npc[owner.MinionAttackTargetNPC];
 				float between = Vector2.Distance(npc.Center, Projectile.Center);
-
+				lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
 				// Reasonable distance away so it doesn't target across multiple screens
 				if (between < 2000f)
 				{
@@ -185,7 +185,7 @@ namespace wdfeerCrazyMod.Projectiles
 						float between = Vector2.Distance(npc.Center, Projectile.Center);
 						bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
 						bool inRange = between < distanceFromTarget;
-						bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
+						lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
 						// Additional check for this specific minion behavior, otherwise it will stop attacking once it dashed through an enemy while flying though tiles afterwards
 						// The number depends on various parameters seen in the movement code below. Test different ones out until it works alright
 						bool closeThroughWall = between < 100f;
@@ -210,25 +210,34 @@ namespace wdfeerCrazyMod.Projectiles
 
 			if (foundTarget)
 			{
-				if (distanceFromTarget > 40)
+				if (distanceFromTarget > 400)
                 {
-					Vector2 direction = targetCenter - Projectile.Center;
-					direction.Normalize();
-					if (distanceFromTarget > 100)
-					{
-						Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction * speed) / inertia;
-					}
-					else
-					{
-						speed = 32f;
-						Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction * speed) / inertia;
+					if (distanceToIdlePosition < 640)
+                    {
+						Vector2 direction = targetCenter - Projectile.Center;
+						direction.Normalize();
+						if (distanceFromTarget > 100)
+						{
+							Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction * speed) / inertia;
+						}
+						else
+						{
+							speed = 32f;
+							Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction * speed) / inertia;
+						}
+					} else
+                    {
+						speed += 4;
+						vectorToIdlePosition.Normalize();
+						vectorToIdlePosition *= speed;
+						Projectile.velocity = (Projectile.velocity * (inertia - 1) + vectorToIdlePosition) / inertia;
 					}
 				}
 			}
 			else
 			{
 				// Minion doesn't have a target: return to player and idle
-				if (distanceToIdlePosition > 600f)
+				if (distanceToIdlePosition > 400f)
 				{
 					// Speed up the minion if it's away from the player
 					speed = 12f;
