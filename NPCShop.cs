@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using wdfeerCrazyMod.Items;
+using wdfeerCrazyMod.Weapons;
 
 namespace wdfeerCrazyMod
 {

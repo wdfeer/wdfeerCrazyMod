@@ -12,16 +12,23 @@ namespace wdfeerCrazyMod
 {
     internal class NPCLoot : GlobalNPC
     {
-        public override void ModifyNPCLoot(NPC npc, Terraria.ModLoader.NPCLoot npcLoot)
+        public IItemDropRule GetItemDropRuleForType(int type)
         {
-            switch (npc.type)
+            switch (type)
             {
                 case NPCID.DarkCaster:
-                    npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.EnchantedUmbrella>(), 14));
-                    break;
+                    return ItemDropRule.Common(ModContent.ItemType<Weapons.EnchantedUmbrella>(), 14);
+                case NPCID.MossHornet or NPCID.BigMossHornet or NPCID.GiantMossHornet or NPCID.TinyMossHornet or NPCID.LittleMossHornet:
+                    return ItemDropRule.Common(ModContent.ItemType<Accessories.PlutoniumAmulet>(), 3);
                 default:
-                    break;
+                    return null;
             }
+        }
+        public override void ModifyNPCLoot(NPC npc, Terraria.ModLoader.NPCLoot npcLoot)
+        {
+            var dropRule = GetItemDropRuleForType(npc.type);
+            if (dropRule != null)
+                npcLoot.Add(dropRule);
         }
     }
 }
