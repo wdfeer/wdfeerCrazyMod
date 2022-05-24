@@ -52,7 +52,6 @@ namespace wdfeerCrazyMod.Projectiles
 		{
 			return true;
 		}
-		int shootCount = 0;
 		int shootCooldown = 20;
 		int shootTimer = 0;
 		public override void AI()
@@ -70,10 +69,7 @@ namespace wdfeerCrazyMod.Projectiles
 			shootTimer++;
 			if (foundTarget && shootTimer >= shootCooldown)
             {
-                for (int i = 0; i < shootTypes.Length; i++)
-                {
-					Shoot(target, 0.2f);
-				}
+				Shoot(target, 0.5f);
 				shootTimer = 0;
 			}
 			Visuals();
@@ -261,29 +257,16 @@ namespace wdfeerCrazyMod.Projectiles
 				}
 			}
 		}
-		int[] shootTypes = { ProjectileID.AmethystBolt, ProjectileID.SapphireBolt };
 		private void Shoot(NPC target, float selfKnockbackMult)
         {
-			shootTypes = new int[] { ProjectileID.AmethystBolt, ProjectileID.SapphireBolt };
-			int type = getCurrentProjectileType();
-			shootCount++;
 			int projectileSpeed = 16;
 
 			float distance = (target.Center - Projectile.Center).Length();
 			float framesToReachTarget = distance / projectileSpeed;
 			Vector2 estimatedFutureTargetPosition = EstimateNPCCenter(target, (int)framesToReachTarget);
 			Vector2 launchVelocity = Vector2.Normalize(estimatedFutureTargetPosition + Main.rand.NextVector2Circular(12, 12) - Projectile.Center) * projectileSpeed;
-			Projectile proj = Fire(launchVelocity, type, Projectile.damage);
+			Projectile proj = Fire(launchVelocity, ModContent.ProjectileType<OrbOfMagicShotProjectile>(), Projectile.damage);
 			Projectile.velocity -= launchVelocity * selfKnockbackMult;
-
-			int getCurrentProjectileType()
-            {
-                for (int i = shootTypes.Length - 1; i >= 0; i--)
-                {
-					if (shootCount % (i + 1) == 0) { return shootTypes[i]; }
-                }
-				return 0;
-            }
         }
 		private Vector2 EstimateNPCCenter(NPC npc, int time)
         {
