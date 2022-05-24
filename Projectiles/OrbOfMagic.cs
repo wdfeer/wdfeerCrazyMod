@@ -272,7 +272,7 @@ namespace wdfeerCrazyMod.Projectiles
 			float distance = (target.Center - Projectile.Center).Length();
 			float framesToReachTarget = distance / projectileSpeed;
 			Vector2 estimatedFutureTargetPosition = EstimateNPCCenter(target, (int)framesToReachTarget);
-			Vector2 launchVelocity = Vector2.Normalize(estimatedFutureTargetPosition - Projectile.Center) * projectileSpeed;
+			Vector2 launchVelocity = Vector2.Normalize(estimatedFutureTargetPosition + Main.rand.NextVector2Circular(12, 12) - Projectile.Center) * projectileSpeed;
 			Projectile proj = Fire(launchVelocity, type, Projectile.damage);
 			Projectile.velocity -= launchVelocity * selfKnockbackMult;
 
@@ -289,11 +289,9 @@ namespace wdfeerCrazyMod.Projectiles
         {
 			Vector2 center = npc.Center;
 			Vector2 velocity = npc.velocity;
-			Vector2 acceleration = velocity - npc.oldVelocity;
             for (int i = 0; i < time; i++)
             {
 				center += velocity;
-				velocity += acceleration;
             }
 			return center;
 		}
