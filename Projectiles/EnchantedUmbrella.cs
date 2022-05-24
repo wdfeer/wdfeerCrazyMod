@@ -12,7 +12,7 @@ namespace wdfeerCrazyMod.Projectiles
 {
     internal class EnchantedUmbrella : ModProjectile
     {
-        public override string Texture => "wdfeerCrazyMod/Items/EnchantedUmbrella";
+        public override string Texture => "wdfeerCrazyMod/Weapons/EnchantedUmbrella";
 		public bool launched = false;
         public override void SetStaticDefaults()
 		{

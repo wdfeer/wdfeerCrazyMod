@@ -38,7 +38,7 @@ namespace wdfeerCrazyMod.Projectiles
             }
 
             Player owner = Main.player[Projectile.owner];
-            if (owner.active && !owner.dead && owner.HeldItem.type == ModContent.ItemType<Items.CopperShortswordMouseControlled>())
+            if (owner.active && !owner.dead && owner.HeldItem.type == ModContent.ItemType<Weapons.CopperShortswordMouseControlled>())
             {
                 Projectile.timeLeft = 15;
                 if (Main.myPlayer == owner.whoAmI)

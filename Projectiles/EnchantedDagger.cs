@@ -12,7 +12,7 @@ namespace wdfeerCrazyMod.Projectiles
 {
     internal class EnchantedDagger : ModProjectile
     {
-        public override string Texture => "wdfeerCrazyMod/Items/EnchantedDagger";
+        public override string Texture => "wdfeerCrazyMod/Weapons/EnchantedDagger";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Enchanted Dagger");

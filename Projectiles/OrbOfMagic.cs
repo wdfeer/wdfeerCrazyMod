@@ -12,7 +12,7 @@ namespace wdfeerCrazyMod.Projectiles
 {
     internal class OrbOfMagic : ModProjectile
     {
-        public override string Texture => "wdfeerCrazyMod/Items/OrbOfMagic";
+        public override string Texture => "wdfeerCrazyMod/Weapons/OrbOfMagic";
         public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Orb of Magic");

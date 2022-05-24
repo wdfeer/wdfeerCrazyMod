@@ -10,13 +10,14 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Items
+namespace wdfeerCrazyMod.Weapons
 {
-    internal class OrbOfMagic : ModItem
+    internal class PossessedUzi : ModItem
     {
+        public override string Texture => "Terraria/Images/Item_" + ItemID.Uzi;
         public override void SetStaticDefaults()
 		{
-			Tooltip.SetDefault("Summons an orb of magic to fight for you");
+			Tooltip.SetDefault("Summons a possessed uzi to fight for you\nRequires 2.5 minion slots");
 
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 			ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
@@ -25,39 +26,36 @@ namespace wdfeerCrazyMod.Items
 
 		public override void SetDefaults()
 		{
-			Item.damage = 99;
-			Item.knockBack = 2f;
-			Item.mana = 24; // mana cost
-			Item.width = 32;
-			Item.height = 32;
-			Item.useTime = 16;
-			Item.useAnimation = 16;
+			Item.damage = 21;
+			Item.knockBack = 1f;
+			Item.mana = 18; // mana cost
+			Item.useTime = 30;
+			Item.useAnimation = 30;
 			Item.scale = 0;
 			Item.useStyle = ItemUseStyleID.Swing; // how the player's arm moves when using the item
-			Item.value = Terraria.Item.sellPrice(gold: 20);
-			Item.rare = 9;
+			Item.value = Item.sellPrice(gold: 6);
+			Item.rare = 7;
 			Item.UseSound = SoundID.Item44; // What sound should play when using the item
 
 			// These below are needed for a minion weapon
 			Item.noMelee = true; // this item doesn't do any melee damage
 			Item.DamageType = DamageClass.Summon; // Makes the damage register as summon. If your item does not have any damage type, it becomes true damage (which means that damage scalars will not affect it). Be sure to have a damage type
-			Item.buffType = ModContent.BuffType<Buffs.OrbOfMagicBuff>();
+			Item.buffType = ModContent.BuffType<Buffs.PossessedUziBuff>();
 			// No buffTime because otherwise the item tooltip would say something like "1 minute duration"
-			Item.shoot = ModContent.ProjectileType<Projectiles.OrbOfMagic>(); // This item creates the minion projectile
+			Item.shoot = ModContent.ProjectileType<Projectiles.PossessedUziProjectile>(); // This item creates the minion projectile
 		}
 
 		public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
 		{
-			// Here you can change where the minion is spawned. Most vanilla minions spawn at the cursor position
-			position = Main.MouseWorld;
+			position = player.Center + new Vector2(0, -48);
 		}
 
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
 			player.AddBuff(Item.buffType, 2);
 
-			var projectile = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, Main.myPlayer);
-			projectile.originalDamage = Item.damage;
+			int projectileID = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
+            Main.projectile[projectileID].originalDamage = Item.damage;
 
 			return false;
 		}
@@ -65,9 +63,9 @@ namespace wdfeerCrazyMod.Items
 		public override void AddRecipes()
 		{
 			CreateRecipe()
-				.AddIngredient(ItemID.FragmentStardust, 8)
-				.AddIngredient(ItemID.SpectreBar, 12)
-				.AddTile(TileID.LunarCraftingStation)
+				.AddIngredient(ItemID.Uzi)
+				.AddIngredient(ItemID.SoulofNight, 16)
+				.AddTile(TileID.MythrilAnvil)
 				.Register();
 		}
 	}

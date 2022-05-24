@@ -10,7 +10,7 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Items
+namespace wdfeerCrazyMod.Weapons
 {
     internal class EnchantedBoomerang : ModItem
     {

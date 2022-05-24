@@ -11,7 +11,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using wdfeerCrazyMod.Projectiles;
 
-namespace wdfeerCrazyMod.Items
+namespace wdfeerCrazyMod.Weapons
 {
     internal class Autobow : ModItem
     {
