@@ -19,7 +19,7 @@ namespace wdfeerCrazyMod
                 case NPCID.DarkCaster:
                     return ItemDropRule.Common(ModContent.ItemType<Weapons.EnchantedUmbrella>(), 14);
                 case NPCID.MossHornet or NPCID.BigMossHornet or NPCID.GiantMossHornet or NPCID.TinyMossHornet or NPCID.LittleMossHornet:
-                    return ItemDropRule.Common(ModContent.ItemType<Accessories.PlutoniumAmulet>(), 3);
+                    return ItemDropRule.Common(ModContent.ItemType<Accessories.PlutoniumAmulet>(), 40);
                 default:
                     return null;
             }
