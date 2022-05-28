@@ -17,6 +17,7 @@ namespace wdfeerCrazyMod.Projectiles
         {
             DisplayName.SetDefault("Copper Shortsword");
         }
+        protected int baseTimeLeft = 15;
         public override void SetDefaults()
         {
             Projectile.width = 32;
@@ -25,7 +26,8 @@ namespace wdfeerCrazyMod.Projectiles
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.tileCollide = false;
-            Projectile.timeLeft = 15;
+            Projectile.timeLeft = baseTimeLeft;
+            Projectile.penetrate = 1;
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 4;
         }
@@ -33,7 +35,7 @@ namespace wdfeerCrazyMod.Projectiles
         {
             if (Projectile.velocity.Length() > 1)
                 Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver4;
-            if (Projectile.timeLeft < 15)
+            if (Projectile.timeLeft < baseTimeLeft)
             {
                 Projectile.alpha = 255 - (255 * Projectile.timeLeft / 15);
             }
