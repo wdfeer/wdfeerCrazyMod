@@ -44,10 +44,11 @@ namespace wdfeerCrazyMod.Weapons
 				return true;
 			Vector2 targetCenter = target.Center;
 			Vector2 currentDirrection = Vector2.Normalize(velocity);
+			float homingDenominator = Main.rand.Next(600, 1200);
             for (int i = 0;i < 25 && position.Distance(targetCenter) > 24; i++) {
 				position += currentDirrection * 48;
 				Vector2 toTarget = targetCenter - position;
-				currentDirrection = Vector2.Normalize(currentDirrection + toTarget * i / 3000);
+				currentDirrection = Vector2.Normalize(currentDirrection + toTarget * i / homingDenominator);
 
 				int projectileID = Projectile.NewProjectile(source, position, Vector2.Zero, type, damage, knockback, player.whoAmI);
 				Projectile projectile = Main.projectile[projectileID];
