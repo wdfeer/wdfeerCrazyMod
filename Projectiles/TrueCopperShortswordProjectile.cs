@@ -19,13 +19,15 @@ namespace wdfeerCrazyMod.Projectiles
         }
         public override void SetDefaults()
         {
+            Projectile.width = 32;
+            Projectile.height = 32;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.tileCollide = false;
             Projectile.timeLeft = 15;
             Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 5;
+            Projectile.idStaticNPCHitCooldown = 4;
         }
         public override void AI()
         {
