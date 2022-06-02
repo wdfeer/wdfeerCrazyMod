@@ -172,7 +172,7 @@ namespace wdfeerCrazyMod.Projectiles
 			Vector2 toTarget = targetCenter - Projectile.Center;
 			{
 				Vector2 launchVelocity = Vector2.Normalize(toTarget) * 16;
-				Projectile proj = Projectile.NewProjectileDirect(Entity.InheritSource(Projectile), Projectile.Center, launchVelocity, ProjectileID.BulletHighVelocity, Projectile.damage, Projectile.knockBack, Projectile.owner);
+				Projectile proj = Projectile.NewProjectileDirect(Projectile.InheritSource(Projectile), Projectile.Center, launchVelocity, ProjectileID.BulletHighVelocity, Projectile.damage, Projectile.knockBack, Projectile.owner);
 				proj.CritChance = Projectile.CritChance;
 				proj.DamageType = DamageClass.Summon;
 			}

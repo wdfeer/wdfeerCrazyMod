@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -27,7 +28,11 @@ namespace wdfeerCrazyMod.Weapons
 			Item.knockBack = 4;
 			Item.value = Item.buyPrice(silver: 50);
 			Item.rare = 2;
-			Item.UseSound = SoundID.Item37.WithVolume(0.4f).WithPitchVariance(-0.2f);
+			{
+				SoundStyle style = SoundID.Item8;
+				style.Volume *= 0.5f;
+				Item.UseSound = style;
+			}
 			Item.autoReuse = true;
 			Item.shootSpeed = 12;
 			Item.shoot = ModContent.ProjectileType<Projectiles.CopperShortswordTomeSword>();

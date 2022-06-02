@@ -280,7 +280,7 @@ namespace wdfeerCrazyMod.Projectiles
 		}
 		private Projectile Fire(Vector2 velocity, int type, int damage)
         {
-			Projectile proj = Projectile.NewProjectileDirect(Entity.InheritSource(Projectile),
+			Projectile proj = Projectile.NewProjectileDirect(Projectile.InheritSource(Projectile),
 													Projectile.Center,
 													velocity,
 													type,
