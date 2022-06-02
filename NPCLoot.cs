@@ -16,6 +16,8 @@ namespace wdfeerCrazyMod
         {
             switch (type)
             {
+                case NPCID.EyeofCthulhu:
+                    return ItemDropRule.Common(ModContent.ItemType<Weapons.WaterOrb>(), 6);
                 case NPCID.DarkCaster:
                     return ItemDropRule.Common(ModContent.ItemType<Weapons.EnchantedUmbrella>(), 14);
                 case NPCID.MossHornet or NPCID.BigMossHornet or NPCID.GiantMossHornet or NPCID.TinyMossHornet or NPCID.LittleMossHornet:
