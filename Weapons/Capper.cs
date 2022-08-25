@@ -3,7 +3,6 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using wdfeerCrazyMod.Projectiles;
 
 namespace wdfeerCrazyMod.Weapons
 {
@@ -33,5 +32,12 @@ namespace wdfeerCrazyMod.Weapons
 			recipe.AddTile(TileID.Anvils);
 			recipe.Register();
 		}
-    }
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+		{
+			Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
+			proj.usesLocalNPCImmunity = true;
+			proj.localNPCHitCooldown = -1;
+			return false;
+		}
+	}
 }
