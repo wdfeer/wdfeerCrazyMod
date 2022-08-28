@@ -6,8 +6,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using wdfeerCrazyMod.Projectiles;
 
-namespace wdfeerCrazyMod.Weapons
-{
+namespace wdfeerCrazyMod.Weapons;
+
 	public class TrueTinShortsword : ModItem
 	{
 		public override void SetDefaults()
@@ -37,8 +37,8 @@ namespace wdfeerCrazyMod.Weapons
 			recipe.AddTile(TileID.LunarCraftingStation);
 			recipe.Register();
 		}
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
+    public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+    {
 			Vector2 target = Main.MouseWorld;
 			Vector2 defaultPosition = position;
 			for (int k = -1; k < 2; k++)
@@ -61,5 +61,4 @@ namespace wdfeerCrazyMod.Weapons
 			}
 			return false;
 		}
-    }
 }

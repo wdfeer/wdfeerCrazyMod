@@ -11,11 +11,11 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using wdfeerCrazyMod.Projectiles;
 
-namespace wdfeerCrazyMod.Weapons
+namespace wdfeerCrazyMod.Weapons;
+
+internal class Autobow : ModItem
 {
-    internal class Autobow : ModItem
-    {
-        public override void SetStaticDefaults()
+    public override void SetStaticDefaults()
 		{
 			Tooltip.SetDefault("Throws a bow that shoots at enemies rapidly while it flies\nArrows deal 50% of the damage");
 		}
@@ -44,4 +44,3 @@ namespace wdfeerCrazyMod.Weapons
 			return false;
 		}
 	}
-}

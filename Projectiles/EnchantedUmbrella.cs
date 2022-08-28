@@ -8,13 +8,13 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Projectiles
+namespace wdfeerCrazyMod.Projectiles;
+
+internal class EnchantedUmbrella : ModProjectile
 {
-    internal class EnchantedUmbrella : ModProjectile
-    {
-        public override string Texture => "wdfeerCrazyMod/Weapons/EnchantedUmbrella";
+    public override string Texture => "wdfeerCrazyMod/Weapons/EnchantedUmbrella";
 		public bool launched = false;
-        public override void SetStaticDefaults()
+    public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Enchanted Umbrella");
 			// This is necessary for right-click targeting
@@ -135,20 +135,20 @@ namespace wdfeerCrazyMod.Projectiles
 		private void Movement(bool foundTarget, Vector2 targetCenter, Vector2 ownerCenter)
 		{
 			if (!foundTarget)
-            {
+        {
 				RotateAroundOwner(ownerCenter, 2);
-            }
-            else
-            {
+        }
+        else
+        {
 				Vector2 diff = targetCenter - ownerCenter;
 				diff.Normalize();
 				float LengthOfDifferenceBetweenOwnerToTargetAndOwnerToProjectile = (diff - vectorFromOwner.SafeNormalize(Vector2.Zero)).Length();
 				if (LengthOfDifferenceBetweenOwnerToTargetAndOwnerToProjectile > 0.02f)
-                {
+            {
 					RotateAroundOwner(ownerCenter, 2f * LengthOfDifferenceBetweenOwnerToTargetAndOwnerToProjectile);
-                }
-                else
-                {
+            }
+            else
+            {
 					Projectile.velocity = vectorFromOwner.SafeNormalize(Vector2.Zero) * 20;
 					Projectile.extraUpdates = 1;
 					Projectile.timeLeft = 60;
@@ -156,11 +156,11 @@ namespace wdfeerCrazyMod.Projectiles
 					Projectile.localNPCHitCooldown = -1;
 					launched = true;
 					Projectile.netUpdate = true;
-                }
             }
+        }
 		}
 		private void RotateAroundOwner(Vector2 ownerCenter, float degrees)
-        {
+    {
 			Projectile.position = ownerCenter + vectorFromOwner;
 			vectorFromOwner = vectorFromOwner.RotatedBy(MathHelper.ToRadians(degrees));
 			Projectile.rotation = (float)Math.Atan2(vectorFromOwner.Y, vectorFromOwner.X) + MathHelper.PiOver2;
@@ -171,4 +171,3 @@ namespace wdfeerCrazyMod.Projectiles
 			Lighting.AddLight(Projectile.Center, new Vector3(0.9f,0.9f,1.4f));
 		}
 	}
-}

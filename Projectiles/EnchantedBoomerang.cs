@@ -8,12 +8,12 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Projectiles
+namespace wdfeerCrazyMod.Projectiles;
+
+internal class EnchantedBoomerang : ModProjectile
 {
-    internal class EnchantedBoomerang : ModProjectile
-    {
-        public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.EnchantedBoomerang;
-        public override void SetStaticDefaults()
+    public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.EnchantedBoomerang;
+    public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Enchanted Boomerang");
 			// This is necessary for right-click targeting
@@ -203,7 +203,7 @@ namespace wdfeerCrazyMod.Projectiles
 			if (foundTarget)
 			{
 				if (distanceFromTarget > 40)
-                {
+            {
 					Vector2 direction = targetCenter - Projectile.Center;
 					direction.Normalize();
 					if (distanceFromTarget > 100)
@@ -265,4 +265,3 @@ namespace wdfeerCrazyMod.Projectiles
 			Lighting.AddLight(Projectile.Center, new Vector3(0.5f,0.5f,0.7f) * 0.78f);
 		}
 	}
-}

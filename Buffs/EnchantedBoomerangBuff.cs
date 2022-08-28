@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Buffs
+namespace wdfeerCrazyMod.Buffs;
+
+internal class EnchantedBoomerangBuff : ModBuff
 {
-    internal class EnchantedBoomerangBuff : ModBuff
-    {
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Enchanted Boomerang");
@@ -33,4 +33,3 @@ namespace wdfeerCrazyMod.Buffs
 			}
 		}
 	}
-}

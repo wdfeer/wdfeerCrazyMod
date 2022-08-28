@@ -5,8 +5,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using wdfeerCrazyMod.Projectiles;
 
-namespace wdfeerCrazyMod.Weapons
-{
+namespace wdfeerCrazyMod.Weapons;
+
 	public class EnchantedDagger : ModItem
 	{
 		public override void SetStaticDefaults()
@@ -41,5 +41,4 @@ namespace wdfeerCrazyMod.Weapons
 			recipe.AddTile(TileID.Anvils);
 			recipe.Register();
 		}
-    }
 }

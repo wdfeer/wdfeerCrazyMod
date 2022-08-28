@@ -6,8 +6,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using wdfeerCrazyMod.Projectiles;
 
-namespace wdfeerCrazyMod.Weapons
-{
+namespace wdfeerCrazyMod.Weapons;
+
 	public class TrueCopperShortsword : ModItem
 	{
 		public override void SetDefaults()
@@ -37,15 +37,15 @@ namespace wdfeerCrazyMod.Weapons
 			recipe.AddTile(TileID.LunarCraftingStation);
 			recipe.Register();
 		}
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
+    public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+    {
 			NPC target = FindTarget(player);
 			if (target == null)
 				return true;
 			Vector2 targetCenter = target.Center;
 			Vector2 currentDirrection = Vector2.Normalize(velocity);
 			float homingDenominator = Main.rand.Next(600, 1200);
-            for (int i = 0;i < 25 && position.Distance(targetCenter) > 24; i++) {
+        for (int i = 0;i < 25 && position.Distance(targetCenter) > 24; i++) {
 				position += currentDirrection * 48;
 				Vector2 toTarget = targetCenter - position;
 				currentDirrection = Vector2.Normalize(currentDirrection + toTarget * i / homingDenominator);
@@ -58,11 +58,10 @@ namespace wdfeerCrazyMod.Weapons
 			return false;
 		}
 		private NPC FindTarget(Player player)
-        {
+    {
 			NPC target = Main.npc.Where(npc => npc.CanBeChasedBy() && !npc.friendly).MinBy(npc => (npc.Center - player.Center).Length());
 			if (target != null && target.Center.Distance(player.Center) < 840)
 				return target;
 			return null;
-        }
     }
 }

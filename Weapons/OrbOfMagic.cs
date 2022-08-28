@@ -10,11 +10,11 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Weapons
+namespace wdfeerCrazyMod.Weapons;
+
+internal class OrbOfMagic : ModItem
 {
-    internal class OrbOfMagic : ModItem
-    {
-        public override void SetStaticDefaults()
+    public override void SetStaticDefaults()
 		{
 			Tooltip.SetDefault("Summons an orb of magic to fight for you");
 
@@ -71,4 +71,3 @@ namespace wdfeerCrazyMod.Weapons
 				.Register();
 		}
 	}
-}

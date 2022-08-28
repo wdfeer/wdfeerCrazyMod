@@ -5,8 +5,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using wdfeerCrazyMod.Projectiles;
 
-namespace wdfeerCrazyMod.Weapons
-{
+namespace wdfeerCrazyMod.Weapons;
+
 	public class FantasyHandcannon : ModItem
 	{
 		public override void SetStaticDefaults()
@@ -42,10 +42,9 @@ namespace wdfeerCrazyMod.Weapons
 			recipe.Register();
 		}
 
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
+    public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+    {
 			Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<FantasyBulletProjectileInitial>(), damage, knockback, player.whoAmI);
 			return false;
 		}
-    }
 }

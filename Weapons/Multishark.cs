@@ -5,8 +5,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using wdfeerCrazyMod.Projectiles;
 
-namespace wdfeerCrazyMod.Weapons
-{
+namespace wdfeerCrazyMod.Weapons;
+
 	public class Multishark : ModItem
 	{
 		public override void SetStaticDefaults()
@@ -43,11 +43,10 @@ namespace wdfeerCrazyMod.Weapons
 					position += muzzleOffset;
 			}
 			for (int i = 0; i < 2; i++)
-            {
+        {
 				int projectileID = Projectile.NewProjectile(source, position, velocity.RotatedByRandom(MathHelper.ToRadians(8)), type, damage, knockback, player.whoAmI);
 				Main.projectile[projectileID].CritChance = player.GetWeaponCrit(Item);
 			}
 			return false;
 		}
-    }
 }

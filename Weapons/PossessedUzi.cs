@@ -10,12 +10,12 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Weapons
+namespace wdfeerCrazyMod.Weapons;
+
+internal class PossessedUzi : ModItem
 {
-    internal class PossessedUzi : ModItem
-    {
-        public override string Texture => "Terraria/Images/Item_" + ItemID.Uzi;
-        public override void SetStaticDefaults()
+    public override string Texture => "Terraria/Images/Item_" + ItemID.Uzi;
+    public override void SetStaticDefaults()
 		{
 			Tooltip.SetDefault("Summons a possessed uzi to fight for you\nRequires 2.5 minion slots");
 
@@ -55,7 +55,7 @@ namespace wdfeerCrazyMod.Weapons
 			player.AddBuff(Item.buffType, 2);
 
 			int projectileID = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-            Main.projectile[projectileID].originalDamage = Item.damage;
+        Main.projectile[projectileID].originalDamage = Item.damage;
 
 			return false;
 		}
@@ -69,4 +69,3 @@ namespace wdfeerCrazyMod.Weapons
 				.Register();
 		}
 	}
-}

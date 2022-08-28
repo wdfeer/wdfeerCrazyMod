@@ -6,8 +6,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using wdfeerCrazyMod.Projectiles;
 
-namespace wdfeerCrazyMod.Weapons
-{
+namespace wdfeerCrazyMod.Weapons;
+
 	public class Starbreak : ModItem
 	{
 		public override void SetStaticDefaults()
@@ -32,30 +32,29 @@ namespace wdfeerCrazyMod.Weapons
 			recipe.Register();
 		}
 		Projectile projectile;
-        public override void HoldItem(Player player)
-        {
+    public override void HoldItem(Player player)
+    {
 			if (Main.myPlayer != player.whoAmI)
 				return;
 			NPC[] nearbyEnemies = Main.npc.Where(npc => npc is { active: true, friendly: false } && npc.CanBeChasedBy() && (player.Center - npc.Center).Length() < 900).ToArray();
 			if (nearbyEnemies.Length == 0)
 				return;
 			if (projectile == null || !projectile.active || projectile.type != ModContent.ProjectileType<Projectiles.StarbreakProjectile>() || projectile.owner != player.whoAmI)
-            {
+        {
 				NPC target = nearbyEnemies.MinBy(npc => (player.Center - npc.Center).Length());
 				Vector2 spawnPosition = target.Center + Main.rand.NextVector2CircularEdge(target.width + 240, target.height + 240);
-                Vector2 velocity = Vector2.Normalize(target.Center - spawnPosition) * 16;
+            Vector2 velocity = Vector2.Normalize(target.Center - spawnPosition) * 16;
 
-                int projectileID = Projectile.NewProjectile(Item.GetSource_ItemUse(Item),
-                                          spawnPosition,
-                                          velocity,
-                                          ModContent.ProjectileType<Projectiles.StarbreakProjectile>(),
-                                          player.GetWeaponDamage(Item),
-                                          Item.knockBack,
+            int projectileID = Projectile.NewProjectile(Item.GetSource_ItemUse(Item),
+                                      spawnPosition,
+                                      velocity,
+                                      ModContent.ProjectileType<Projectiles.StarbreakProjectile>(),
+                                      player.GetWeaponDamage(Item),
+                                      Item.knockBack,
 										  player.whoAmI);
 				projectile = Main.projectile[projectileID];
 				projectile.CritChance = player.GetWeaponCrit(Item);
 				projectile.netUpdate = true;
-            }
         }
     }
 }

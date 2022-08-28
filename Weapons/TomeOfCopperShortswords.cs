@@ -6,8 +6,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using wdfeerCrazyMod.Projectiles;
 
-namespace wdfeerCrazyMod.Weapons
-{
+namespace wdfeerCrazyMod.Weapons;
+
 	public class TomeOfCopperShortswords : ModItem
 	{
 		public override void SetStaticDefaults()
@@ -46,7 +46,7 @@ namespace wdfeerCrazyMod.Weapons
 			recipe.Register();
 		}
 		int GetNumberOfSwords()
-        {
+    {
 			int result = 2;
 			if (NPC.downedBoss1)
 				result++;
@@ -55,9 +55,9 @@ namespace wdfeerCrazyMod.Weapons
 			if (NPC.downedBoss3)
 				result++;
 			return result;
-        }
+    }
 		int GetExtraDamage()
-        {
+    {
 			int result = 0;
 			if (NPC.downedSlimeKing)
 				result++;
@@ -68,14 +68,14 @@ namespace wdfeerCrazyMod.Weapons
 			if (NPC.downedBoss3)
 				result += 3;
 			return result;
-        }
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
+    }
+    public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+    {
 			Vector2 target = Main.MouseWorld;
 			damage += GetExtraDamage();
 			int numOfSwords = GetNumberOfSwords();
-            for (int i = 0; i < numOfSwords; i++)
-            {
+        for (int i = 0; i < numOfSwords; i++)
+        {
 				position = position + Main.rand.NextVector2Circular(100, 100);
 				Dust d = Dust.NewDustPerfect(position, DustID.CopperCoin);
 				d.noGravity = true;
@@ -89,5 +89,4 @@ namespace wdfeerCrazyMod.Weapons
 			}
 			return false;
 		}
-    }
 }

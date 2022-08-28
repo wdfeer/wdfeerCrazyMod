@@ -5,8 +5,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using wdfeerCrazyMod.Projectiles;
 
-namespace wdfeerCrazyMod.Weapons
-{
+namespace wdfeerCrazyMod.Weapons;
+
 	public class CopperShortswordMouseControlled : ModItem
 	{
 		public override string Texture => "Terraria/Images/Item_" + ItemID.CopperShortsword;
@@ -39,21 +39,20 @@ namespace wdfeerCrazyMod.Weapons
 			recipe.Register();
 		}
 		Projectile projectile;
-        public override void HoldItem(Player player)
-        {
+    public override void HoldItem(Player player)
+    {
 			if (Main.myPlayer != player.whoAmI)
 				return;
-            if (projectile == null || !projectile.active || projectile.type != ModContent.ProjectileType<Projectiles.CopperShortswordMouseControlled>() || projectile.owner != player.whoAmI)
-            {
+        if (projectile == null || !projectile.active || projectile.type != ModContent.ProjectileType<Projectiles.CopperShortswordMouseControlled>() || projectile.owner != player.whoAmI)
+        {
 				int projectileID = Projectile.NewProjectile(Item.GetSource_ItemUse(Item),
-                                          Main.MouseWorld,
-                                          Vector2.Zero,
-                                          ModContent.ProjectileType<Projectiles.CopperShortswordMouseControlled>(),
-                                          Item.damage,
-                                          Item.knockBack,
+                                      Main.MouseWorld,
+                                      Vector2.Zero,
+                                      ModContent.ProjectileType<Projectiles.CopperShortswordMouseControlled>(),
+                                      Item.damage,
+                                      Item.knockBack,
 										  player.whoAmI);
 				projectile = Main.projectile[projectileID];
-            }
         }
     }
 }

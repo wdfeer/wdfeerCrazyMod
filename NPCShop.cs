@@ -8,17 +8,16 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using wdfeerCrazyMod.Weapons;
 
-namespace wdfeerCrazyMod
+namespace wdfeerCrazyMod;
+
+internal class NPCShop : GlobalNPC
 {
-    internal class NPCShop : GlobalNPC
+    public override void SetupShop(int type, Chest shop, ref int nextSlot)
     {
-        public override void SetupShop(int type, Chest shop, ref int nextSlot)
+        if (type == NPCID.Steampunker)
         {
-            if (type == NPCID.Steampunker)
-            {
-                shop.item[nextSlot].SetDefaults(ModContent.ItemType<Autobow>());
-                nextSlot++;
-            }
+            shop.item[nextSlot].SetDefaults(ModContent.ItemType<Autobow>());
+            nextSlot++;
         }
     }
 }

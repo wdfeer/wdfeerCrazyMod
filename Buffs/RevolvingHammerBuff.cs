@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Buffs
+namespace wdfeerCrazyMod.Buffs;
+
+internal class RevolvingHammerBuff : ModBuff
 {
-    internal class RevolvingHammerBuff : ModBuff
-    {
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Revolving Hammer");
@@ -33,4 +33,3 @@ namespace wdfeerCrazyMod.Buffs
 			}
 		}
 	}
-}

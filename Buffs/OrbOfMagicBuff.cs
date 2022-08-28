@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Buffs
+namespace wdfeerCrazyMod.Buffs;
+
+internal class OrbOfMagicBuff : ModBuff
 {
-    internal class OrbOfMagicBuff : ModBuff
-    {
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Orb of magic");
@@ -33,4 +33,3 @@ namespace wdfeerCrazyMod.Buffs
 			}
 		}
 	}
-}

@@ -10,12 +10,12 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Weapons
+namespace wdfeerCrazyMod.Weapons;
+
+internal class RevolvingHammer : ModItem
 {
-    internal class RevolvingHammer : ModItem
-    {
-        public override string Texture => "Terraria/Images/Item_" + ItemID.PaladinsHammer;
-        public override void SetStaticDefaults()
+    public override string Texture => "Terraria/Images/Item_" + ItemID.PaladinsHammer;
+    public override void SetStaticDefaults()
 		{
 			Tooltip.SetDefault("Summons a Paladin's hammer to revolve around you at insane speeds");
 
@@ -71,4 +71,3 @@ namespace wdfeerCrazyMod.Weapons
 				.Register();
 		}
 	}
-}

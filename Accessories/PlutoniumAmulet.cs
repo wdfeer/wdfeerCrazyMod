@@ -8,10 +8,10 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Accessories
+namespace wdfeerCrazyMod.Accessories;
+
+internal class PlutoniumAmulet : ModItem
 {
-    internal class PlutoniumAmulet : ModItem
-    {
 		public override void SetStaticDefaults()
 		{
 			Tooltip.SetDefault("+25% damage dealt\n+25% damage taken");
@@ -30,4 +30,3 @@ namespace wdfeerCrazyMod.Accessories
 			player.endurance -= 0.25f;
 		}
 	}
-}

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Buffs
+namespace wdfeerCrazyMod.Buffs;
+
+internal class EnchantedUmbrellaBuff : ModBuff
 {
-    internal class EnchantedUmbrellaBuff : ModBuff
-    {
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Enchanted Umbrella");
@@ -35,4 +35,3 @@ namespace wdfeerCrazyMod.Buffs
 			}
 		}
 	}
-}

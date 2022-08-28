@@ -8,12 +8,12 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Projectiles
+namespace wdfeerCrazyMod.Projectiles;
+
+internal class RevolvingHammer : ModProjectile
 {
-    internal class RevolvingHammer : ModProjectile
-    {
-        public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.PaladinsHammerFriendly;
-        public override void SetStaticDefaults()
+    public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.PaladinsHammerFriendly;
+    public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Revolving Hammer");
 			// This is necessary for right-click targeting
@@ -29,7 +29,7 @@ namespace wdfeerCrazyMod.Projectiles
 			Projectile.usesLocalNPCImmunity = true;
 			Projectile.localNPCHitCooldown = 6;
 
-			// These below are needed for a minion weapon
+			Main.projPet[Projectile.type] = true;
 			Projectile.friendly = true; // Only controls if it deals damage to enemies on contact (more on that later)
 			Projectile.minion = true; // Declares this as a minion (has many effects)
 			Projectile.DamageType = DamageClass.Summon; // Declares the damage type (needed for it to deal damage)
@@ -132,13 +132,13 @@ namespace wdfeerCrazyMod.Projectiles
 		{
 			Vector2 ownerCenter = owner.Center;
 			if (!foundTarget)
-            {
+        {
 				degreesOfRotation++;
 				Projectile.position = GetPosition(owner);
 				Projectile.rotation = GetRotation(ownerCenter);
 			}
-            else
-            {
+        else
+        {
 				float distanceFromOwnerToTarget = ownerCenter.Distance(targetCenter);
 				if (distanceFromOwnerToTarget > distanceToOwnerCenter)
 					distanceToOwnerCenter += 5;
@@ -158,7 +158,7 @@ namespace wdfeerCrazyMod.Projectiles
 			int myIndex = Array.IndexOf(allHammerIDs, Projectile.whoAmI);
 			float rads = MathHelper.ToRadians(360 / allHammerIDs.Length * myIndex);
 			if (myIndex != 0)
-            {
+        {
 				degreesOfRotation = hammerLeader.degreesOfRotation;
 				distanceToOwnerCenter = hammerLeader.distanceToOwnerCenter;
 			}
@@ -166,7 +166,7 @@ namespace wdfeerCrazyMod.Projectiles
 			return owner.VisualPosition + ownerToPosition;
 		}
 		private float GetRotation(Vector2 ownerCenter)
-        {
+    {
 			Vector2 vectorFromOwner = Projectile.position - ownerCenter;
 			return (float)Math.Atan2(vectorFromOwner.Y, vectorFromOwner.X) + MathHelper.PiOver4;
 		}
@@ -179,4 +179,3 @@ namespace wdfeerCrazyMod.Projectiles
 			Lighting.AddLight(Projectile.Center, new Vector3(0.6f, 0.6f, 0.4f));
 		}
 	}
-}

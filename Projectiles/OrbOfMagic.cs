@@ -8,12 +8,12 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Projectiles
+namespace wdfeerCrazyMod.Projectiles;
+
+internal class OrbOfMagic : ModProjectile
 {
-    internal class OrbOfMagic : ModProjectile
-    {
-        public override string Texture => "wdfeerCrazyMod/Weapons/OrbOfMagic";
-        public override void SetStaticDefaults()
+    public override string Texture => "wdfeerCrazyMod/Weapons/OrbOfMagic";
+    public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Orb of Magic");
 			// This is necessary for right-click targeting
@@ -68,7 +68,7 @@ namespace wdfeerCrazyMod.Projectiles
 			Movement(foundTarget, distanceFromTarget, foundTarget ? target.Center : Vector2.Zero, distanceToIdlePosition, vectorToIdlePosition);
 			shootTimer++;
 			if (foundTarget && shootTimer >= shootCooldown)
-            {
+        {
 				Shoot(target, 0.5f);
 				shootTimer = 0;
 			}
@@ -201,9 +201,9 @@ namespace wdfeerCrazyMod.Projectiles
 			if (foundTarget)
 			{
 				if (distanceFromTarget > 400)
-                {
+            {
 					if (distanceToIdlePosition < 640)
-                    {
+                {
 						Vector2 direction = targetCenter - Projectile.Center;
 						direction.Normalize();
 						if (distanceFromTarget > 100)
@@ -216,7 +216,7 @@ namespace wdfeerCrazyMod.Projectiles
 							Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction * speed) / inertia;
 						}
 					} else
-                    {
+                {
 						speed += 4;
 						vectorToIdlePosition.Normalize();
 						vectorToIdlePosition *= speed;
@@ -258,7 +258,7 @@ namespace wdfeerCrazyMod.Projectiles
 			}
 		}
 		private void Shoot(NPC target, float selfKnockbackMult)
-        {
+    {
 			int projectileSpeed = 16;
 
 			float distance = (target.Center - Projectile.Center).Length();
@@ -267,19 +267,19 @@ namespace wdfeerCrazyMod.Projectiles
 			Vector2 launchVelocity = Vector2.Normalize(estimatedFutureTargetPosition + Main.rand.NextVector2Circular(12, 12) - Projectile.Center) * projectileSpeed;
 			Projectile proj = Fire(launchVelocity, ModContent.ProjectileType<OrbOfMagicShotProjectile>(), Projectile.damage);
 			Projectile.velocity -= launchVelocity * selfKnockbackMult;
-        }
+    }
 		private Vector2 EstimateNPCCenter(NPC npc, int time)
-        {
+    {
 			Vector2 center = npc.Center;
 			Vector2 velocity = npc.velocity;
-            for (int i = 0; i < time; i++)
-            {
+        for (int i = 0; i < time; i++)
+        {
 				center += velocity;
-            }
+        }
 			return center;
 		}
 		private Projectile Fire(Vector2 velocity, int type, int damage)
-        {
+    {
 			Projectile proj = Projectile.NewProjectileDirect(Projectile.InheritSource(Projectile),
 													Projectile.Center,
 													velocity,
@@ -307,4 +307,3 @@ namespace wdfeerCrazyMod.Projectiles
 			Lighting.AddLight(Projectile.Center, new Vector3(0.5f,0.5f,0.7f) * 0.78f);
 		}
 	}
-}

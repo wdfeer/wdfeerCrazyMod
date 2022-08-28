@@ -10,12 +10,12 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Weapons
+namespace wdfeerCrazyMod.Weapons;
+
+internal class EnchantedBoomerang : ModItem
 {
-    internal class EnchantedBoomerang : ModItem
-    {
-        public override string Texture => "Terraria/Images/Item_" + ItemID.EnchantedBoomerang;
-        public override void SetStaticDefaults()
+    public override string Texture => "Terraria/Images/Item_" + ItemID.EnchantedBoomerang;
+    public override void SetStaticDefaults()
 		{
 			Tooltip.SetDefault("Summons an enchanted boomerang to fight for you");
 
@@ -88,4 +88,3 @@ namespace wdfeerCrazyMod.Weapons
 				.Register();
 		}
 	}
-}

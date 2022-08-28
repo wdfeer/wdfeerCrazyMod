@@ -9,12 +9,12 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Projectiles
+namespace wdfeerCrazyMod.Projectiles;
+
+internal class PossessedUziProjectile : ModProjectile
 {
-    internal class PossessedUziProjectile : ModProjectile
-    {
-        public override string Texture => "Terraria/Images/Item_" + ItemID.Uzi;
-        public override void SetStaticDefaults()
+    public override string Texture => "Terraria/Images/Item_" + ItemID.Uzi;
+    public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Possessed Uzi");
 			// This is necessary for right-click targeting
@@ -107,33 +107,33 @@ namespace wdfeerCrazyMod.Projectiles
 		}
 		private void SearchForTargets(Player owner, out bool foundTarget, out Vector2 targetCenter)
 		{
-            float distanceToTarget;
-            GetPlayersTarget(owner, out foundTarget, out distanceToTarget, out targetCenter);
+        float distanceToTarget;
+        GetPlayersTarget(owner, out foundTarget, out distanceToTarget, out targetCenter);
 			if (foundTarget)
 				return;
 			else
 			{
 				// This code is required either way, used for finding a target
 				for (int i = 0; i < Main.maxNPCs; i++)
-                {
-                    NPC npc = Main.npc[i];
+            {
+                NPC npc = Main.npc[i];
 
-                    if (!npc.CanBeChasedBy())
-                        continue;
-                    float between = Vector2.Distance(npc.Center, Projectile.Center);
-                    bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
-                    bool inRange = between < distanceToTarget;
-                    bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
-                    // Additional check for this specific minion behavior, otherwise it will stop attacking once it dashed through an enemy while flying though tiles afterwards
-                    // The number depends on various parameters seen in the movement code below. Test different ones out until it works alright
-                    if (((closest && inRange) || !foundTarget) && lineOfSight)
-                    {
-                        distanceToTarget = between;
-                        targetCenter = npc.Center;
-                        foundTarget = true;
-                    }
+                if (!npc.CanBeChasedBy())
+                    continue;
+                float between = Vector2.Distance(npc.Center, Projectile.Center);
+                bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
+                bool inRange = between < distanceToTarget;
+                bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
+                // Additional check for this specific minion behavior, otherwise it will stop attacking once it dashed through an enemy while flying though tiles afterwards
+                // The number depends on various parameters seen in the movement code below. Test different ones out until it works alright
+                if (((closest && inRange) || !foundTarget) && lineOfSight)
+                {
+                    distanceToTarget = between;
+                    targetCenter = npc.Center;
+                    foundTarget = true;
                 }
             }
+        }
 
 			Projectile.friendly = foundTarget;
 		}
@@ -182,11 +182,11 @@ namespace wdfeerCrazyMod.Projectiles
 			SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
 
 			if (toTarget.X > 0)
-            {
+        {
 				Projectile.rotation = (float)Math.Atan2(toTarget.Y, toTarget.X);
 				Projectile.spriteDirection = 1;
 			} else if (toTarget.X < 0)
-            {
+        {
 				Projectile.rotation = (float)Math.Atan2(toTarget.Y, toTarget.X) + MathHelper.Pi;
 				Projectile.spriteDirection = -1;
 			}
@@ -197,4 +197,3 @@ namespace wdfeerCrazyMod.Projectiles
 			return;
 		}
 	}
-}

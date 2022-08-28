@@ -5,8 +5,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using wdfeerCrazyMod.Projectiles;
 
-namespace wdfeerCrazyMod.Weapons
-{
+namespace wdfeerCrazyMod.Weapons;
+
 	public class HallowedThreepeater : ModItem
 	{
 		public override void SetStaticDefaults()
@@ -26,11 +26,11 @@ namespace wdfeerCrazyMod.Weapons
 			recipe.AddTile(TileID.MythrilAnvil);
 			recipe.Register();
 		}
-        public override Vector2? HoldoutOffset()
-        {
+    public override Vector2? HoldoutOffset()
+    {
 			return new Vector2(-3, 0);
-        }
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+    }
+    public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
 			{ 
 				Vector2 muzzleOffset = velocity.SafeNormalize(Vector2.Zero) * Item.width;
@@ -38,12 +38,11 @@ namespace wdfeerCrazyMod.Weapons
 					position += muzzleOffset;
 			}
 			for (int i = 0; i < 3; i++)
-            {
+        {
 				int projectileID = Projectile.NewProjectile(source, position, velocity.RotatedByRandom(MathHelper.ToRadians(14)), type, damage, knockback, player.whoAmI);
 				Main.projectile[projectileID].noDropItem = true;
 				Main.projectile[projectileID].CritChance = player.GetWeaponCrit(Item);
 			}
 			return false;
 		}
-    }
 }

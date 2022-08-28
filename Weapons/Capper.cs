@@ -4,8 +4,8 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Weapons
-{
+namespace wdfeerCrazyMod.Weapons;
+
 	public class Capper : ModItem
 	{
 		public override void SetStaticDefaults()
@@ -40,4 +40,3 @@ namespace wdfeerCrazyMod.Weapons
 			return false;
 		}
 	}
-}

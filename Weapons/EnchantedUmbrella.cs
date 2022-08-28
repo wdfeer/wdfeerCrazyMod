@@ -10,11 +10,11 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace wdfeerCrazyMod.Weapons
+namespace wdfeerCrazyMod.Weapons;
+
+internal class EnchantedUmbrella : ModItem
 {
-    internal class EnchantedUmbrella : ModItem
-    {
-        public override void SetStaticDefaults()
+    public override void SetStaticDefaults()
 		{
 			Tooltip.SetDefault("Summons an enchanted umbrella to protect you and throw itself at a nearby enemy\nDoesn't consume minion slots\nUp to three umbrellas can be active at once\nEach umbrella provides 5 defense");
 
@@ -45,14 +45,14 @@ namespace wdfeerCrazyMod.Weapons
 			// No buffTime because otherwise the item tooltip would say something like "1 minute duration"
 			Item.shoot = ModContent.ProjectileType<Projectiles.EnchantedUmbrella>(); // This item creates the minion projectile
 		}
-        public override bool CanUseItem(Player player)
-        {
+    public override bool CanUseItem(Player player)
+    {
 			int numOfUmbrellas = player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.EnchantedUmbrella>()];
 			if (numOfUmbrellas >= 3)
 				return false;
 			return true;
 		}
-        public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+    public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
 		{
 			// Here you can change where the minion is spawned. Most vanilla minions spawn at the cursor position
 			position = player.position;
@@ -68,4 +68,3 @@ namespace wdfeerCrazyMod.Weapons
 			return false;
 		}
 	}
-}
