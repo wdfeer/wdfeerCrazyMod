@@ -1,9 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -39,7 +35,7 @@ internal class StarbreakProjectile : ModProjectile
     {
         for (int i = 0; i < 25; i++)
         {
-            Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(60,60), DustID.Firework_Blue);
+            Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(60, 60), DustID.Firework_Blue);
             d.noGravity = true;
         }
     }

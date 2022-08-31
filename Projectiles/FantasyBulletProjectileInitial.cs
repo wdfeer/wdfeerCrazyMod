@@ -1,9 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -58,7 +54,7 @@ internal class FantasyBulletProjectileInitial : ModProjectile
     {
         for (int i = 0; i < 12; i++)
         {
-            Dust d = Dust.NewDustPerfect(Projectile.position + Main.rand.NextVector2Circular(35,35), DustID.Smoke);
+            Dust d = Dust.NewDustPerfect(Projectile.position + Main.rand.NextVector2Circular(35, 35), DustID.Smoke);
         }
     }
 }

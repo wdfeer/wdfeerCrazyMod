@@ -6,8 +6,8 @@ using Terraria.ModLoader;
 
 namespace wdfeerCrazyMod;
 
-	public class wdfeerCrazyMod : Mod
-	{
+public class wdfeerCrazyMod : Mod
+{
     public override void HandlePacket(BinaryReader reader, int whoAmI)
     {
         MessageType messageType = (MessageType)reader.ReadByte();
@@ -30,6 +30,22 @@ namespace wdfeerCrazyMod;
                     packet.Send(ignoreClient: whoAmI);
                 }
                 break;
+            case MessageType.ProjectileRotation:
+                projectileID = reader.ReadInt32();
+                float rotation = reader.ReadSingle();
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    ModPacket packet = GetPacket();
+                    packet.Write((byte)messageType);
+                    packet.Write(projectileID);
+                    packet.Write(rotation);
+                    packet.Send(ignoreClient: whoAmI);
+                }
+                else
+                {
+                    Main.projectile[projectileID].rotation = rotation;
+                }
+                break;
             default:
                 break;
         }
@@ -37,5 +53,6 @@ namespace wdfeerCrazyMod;
 }
 public enum MessageType
 {
-    MouseControlledCopperShortsword
+    MouseControlledCopperShortsword,
+    ProjectileRotation
 }

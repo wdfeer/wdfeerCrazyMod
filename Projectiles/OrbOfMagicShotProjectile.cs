@@ -1,9 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -26,7 +22,7 @@ internal class OrbOfMagicShotProjectile : ModProjectile
         Projectile.penetrate = 3;
 
         int[] possibleDustTypes = { DustID.Clentaminator_Purple, DustID.Clentaminator_Cyan, DustID.Clentaminator_Blue };
-        dustType = possibleDustTypes[Main.rand.Next(0,possibleDustTypes.Length)];
+        dustType = possibleDustTypes[Main.rand.Next(0, possibleDustTypes.Length)];
         trigonometry = Main.rand.NextBool() ? MathF.Sin : MathF.Cos;
     }
     public override void AI()
