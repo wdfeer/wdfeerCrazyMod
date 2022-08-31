@@ -27,17 +27,42 @@ internal class BulletHellProjectile : ModProjectile
         Projectile.localNPCHitCooldown = -1;
     }
     public Player Owner => Main.player[Projectile.owner];
-    public Action<Projectile> ai = (Projectile projectile) => { };
     public override void AI()
     {
         Vector2 ownerPosDiff = Owner.position - Owner.oldPosition;
         Projectile.position += ownerPosDiff;
-        ai(Projectile);
+        ExtraAI();
     }
+    protected virtual void ExtraAI() { }
     public override bool? CanHitNPC(NPC target)
     {
         if (Projectile.timeLeft > 112)
             return false;
         return base.CanHitNPC(target);
+    }
+}
+class BulletHellProjectile1 : BulletHellProjectile
+{
+    protected override void ExtraAI()
+    {
+        if (Projectile.timeLeft == 92)
+        {
+            Projectile.velocity /= 4;
+        }
+    }
+}
+class BulletHellProjectile2 : BulletHellProjectile
+{
+    protected override void ExtraAI()
+    {
+        Projectile.velocity = Projectile.velocity.RotatedBy(0.01f);
+    }
+}
+class BulletHellProjectile3 : BulletHellProjectile
+{
+    protected override void ExtraAI()
+    {
+        if (Projectile.timeLeft == 70)
+            Projectile.velocity *= -0.65f;
     }
 }

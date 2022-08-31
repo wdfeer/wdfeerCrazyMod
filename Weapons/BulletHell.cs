@@ -32,7 +32,7 @@ internal class BulletHell : ModItem
         Item.shootSpeed = 14;
         Item.autoReuse = true;
     }
-    int castTimer = 0;
+    int castTimer = 999;
     public override void UpdateInventory(Player player)
         => castTimer++;
     float useNum = 0;
@@ -65,18 +65,11 @@ internal class BulletHell : ModItem
                             source,
                             position,
                             velocity.RotatedBy(i * angleStep),
-                            type,
+                            ModContent.ProjectileType<BulletHellProjectile1>(),
                             damage,
                             knockback,
                             player.whoAmI);
                         projectile.penetrate = 2;
-                        (projectile.ModProjectile as BulletHellProjectile).ai = (Projectile projectile) =>
-                        {
-                            if (projectile.timeLeft == 92)
-                            {
-                                projectile.velocity /= 4;
-                            }
-                        };
                     }
                 };
                 return;
@@ -92,14 +85,10 @@ internal class BulletHell : ModItem
                             source,
                             position,
                             velocity.RotatedBy(i * angleStep),
-                            type,
+                            ModContent.ProjectileType<BulletHellProjectile2>(),
                             damage,
                             knockback,
                             player.whoAmI);
-                        (projectile.ModProjectile as BulletHellProjectile).ai = (Projectile projectile) =>
-                        {
-                            projectile.velocity = projectile.velocity.RotatedBy(0.01f);
-                        };
                     }
                 };
                 return;
@@ -114,15 +103,10 @@ internal class BulletHell : ModItem
                             source,
                             position,
                             velocity.RotatedBy(i * angleStep),
-                            type,
+                            ModContent.ProjectileType<BulletHellProjectile3>(),
                             damage,
                             knockback,
                             player.whoAmI);
-                        (projectile.ModProjectile as BulletHellProjectile).ai = (Projectile projectile) =>
-                        {
-                            if (projectile.timeLeft == 70)
-                                projectile.velocity *= -0.65f;
-                        };
                     }
                 };
                 break;
