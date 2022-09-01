@@ -1,7 +1,4 @@
-﻿using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using wdfeerCrazyMod.Weapons;
+﻿using wdfeerCrazyMod.Weapons;
 
 namespace wdfeerCrazyMod;
 

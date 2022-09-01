@@ -1,8 +1,3 @@
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-
 namespace wdfeerCrazyMod.Weapons;
 
 public class CopperShortswordMouseControlled : ModItem

@@ -1,10 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-
-namespace wdfeerCrazyMod.Projectiles;
+﻿namespace wdfeerCrazyMod.Projectiles;
 
 internal class OrbOfMagicShotProjectile : ModProjectile
 {

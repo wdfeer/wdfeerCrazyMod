@@ -1,8 +1,4 @@
-using Microsoft.Xna.Framework;
-using Terraria;
 using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace wdfeerCrazyMod.Weapons;
 
@@ -55,12 +51,14 @@ public class TrueTinShortsword : ModItem
 				projectile.rotation = currentDirrection.ToRotation() + MathHelper.PiOver4;
 				if (d > 256)
 					projectile.timeLeft = (int)(projectile.timeLeft * 256 / d);
-
-				ModPacket packet = Mod.GetPacket();
-				packet.Write((byte)MessageType.ProjectileRotation);
-				packet.Write(projectileID);
-				packet.Write(projectile.rotation);
-				packet.Send();
+				if (Main.netMode != NetmodeID.SinglePlayer)
+				{
+					ModPacket packet = Mod.GetPacket();
+					packet.Write((byte)MessageType.ProjectileRotation);
+					packet.Write(projectileID);
+					packet.Write(projectile.rotation);
+					packet.Send();
+				}
 			}
 		}
 		return false;

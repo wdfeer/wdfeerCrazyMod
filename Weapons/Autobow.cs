@@ -1,9 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using Terraria;
-using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
+﻿using Terraria.DataStructures;
 using wdfeerCrazyMod.Projectiles;
 
 namespace wdfeerCrazyMod.Weapons;
