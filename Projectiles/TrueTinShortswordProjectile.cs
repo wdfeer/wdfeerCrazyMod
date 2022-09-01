@@ -1,7 +1,4 @@
-﻿using Terraria;
-using Terraria.ID;
-
-namespace wdfeerCrazyMod.Projectiles;
+﻿namespace wdfeerCrazyMod.Projectiles;
 
 internal class TrueTinShortswordProjectile : TrueCopperShortswordProjectile
 {

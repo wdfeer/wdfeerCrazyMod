@@ -1,9 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using Terraria;
-using Terraria.Audio;
-using Terraria.ID;
-using Terraria.ModLoader;
+﻿using Terraria.Audio;
 
 namespace wdfeerCrazyMod.Projectiles;
 
@@ -25,7 +20,7 @@ internal class FantasyBulletProjectileSecond : ModProjectile
     public override void AI()
     {
         Projectile.rotation = (float)Math.Atan2(Projectile.velocity.Y, Projectile.velocity.X);
-        if (!target.active)
+        if (target == null || !target.active)
             return;
         Projectile.velocity += (target.Center - Projectile.Center).SafeNormalize(Vector2.Zero) / 5;
         if (Projectile.velocity.Length() > 16)

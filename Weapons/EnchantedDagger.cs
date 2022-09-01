@@ -1,7 +1,3 @@
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-
 namespace wdfeerCrazyMod.Weapons;
 
 public class EnchantedDagger : ModItem

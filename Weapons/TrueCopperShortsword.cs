@@ -1,9 +1,5 @@
-using Microsoft.Xna.Framework;
 using System.Linq;
-using Terraria;
 using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace wdfeerCrazyMod.Weapons;
 
@@ -54,12 +50,14 @@ public class TrueCopperShortsword : ModItem
 			Projectile projectile = Main.projectile[projectileID];
 			projectile.CritChance = player.GetWeaponCrit(Item);
 			projectile.rotation = currentDirrection.ToRotation() + MathHelper.PiOver4;
-
-            ModPacket packet = Mod.GetPacket();
-            packet.Write((byte)MessageType.ProjectileRotation);
-            packet.Write(projectileID);
-            packet.Write(projectile.rotation);
-            packet.Send();
+			if (Main.netMode != NetmodeID.SinglePlayer)
+			{
+                ModPacket packet = Mod.GetPacket();
+                packet.Write((byte)MessageType.ProjectileRotation);
+                packet.Write(projectileID);
+                packet.Write(projectile.rotation);
+                packet.Send();
+            }
         }
 		return false;
 	}

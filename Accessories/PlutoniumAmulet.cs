@@ -1,7 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-
-namespace wdfeerCrazyMod.Accessories;
+﻿namespace wdfeerCrazyMod.Accessories;
 
 internal class PlutoniumAmulet : ModItem
 {

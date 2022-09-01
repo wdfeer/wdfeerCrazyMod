@@ -1,10 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Linq;
-using Terraria;
+﻿using System.Linq;
 using Terraria.Audio;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace wdfeerCrazyMod.Projectiles;
 

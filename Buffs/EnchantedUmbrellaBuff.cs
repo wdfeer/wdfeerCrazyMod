@@ -1,7 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-
-namespace wdfeerCrazyMod.Buffs;
+﻿namespace wdfeerCrazyMod.Buffs;
 
 internal class EnchantedUmbrellaBuff : ModBuff
 {

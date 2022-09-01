@@ -1,10 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-
-namespace wdfeerCrazyMod.Projectiles;
+﻿namespace wdfeerCrazyMod.Projectiles;
 
 internal class FantasyBulletProjectileInitial : ModProjectile
 {
@@ -46,6 +40,7 @@ internal class FantasyBulletProjectileInitial : ModProjectile
                                                         Projectile.owner);
             Projectile projectile = Main.projectile[projectileID];
             projectile.CritChance = Projectile.CritChance;
+            projectile.netUpdate = true;
             FantasyBulletProjectileSecond modProj = projectile.ModProjectile as FantasyBulletProjectileSecond;
             modProj.target = target;
         }

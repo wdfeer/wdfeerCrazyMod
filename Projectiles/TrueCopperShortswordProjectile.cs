@@ -1,9 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-
-namespace wdfeerCrazyMod.Projectiles;
+﻿namespace wdfeerCrazyMod.Projectiles;
 
 internal class TrueCopperShortswordProjectile : ModProjectile
 {
