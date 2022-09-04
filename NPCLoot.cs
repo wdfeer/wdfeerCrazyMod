@@ -1,4 +1,5 @@
 ﻿using Terraria.GameContent.ItemDropRules;
+using wdfeerCrazyMod.Accessories;
 using wdfeerCrazyMod.Weapons;
 
 namespace wdfeerCrazyMod;
@@ -14,7 +15,9 @@ internal class NPCLoot : GlobalNPC
             case NPCID.DarkCaster:
                 return ItemDropRule.Common(ModContent.ItemType<EnchantedUmbrella>(), 14);
             case NPCID.MossHornet or NPCID.BigMossHornet or NPCID.GiantMossHornet or NPCID.TinyMossHornet or NPCID.LittleMossHornet:
-                return ItemDropRule.Common(ModContent.ItemType<Accessories.PlutoniumAmulet>(), 40);
+                return ItemDropRule.Common(ModContent.ItemType<PlutoniumAmulet>(), 40);
+            case NPCID.TheDestroyer or NPCID.SkeletronPrime:
+                return ItemDropRule.NotScalingWithLuck(ModContent.ItemType<DangerlessAmulet>(), 4);
             case NPCID.HallowBoss:
                 return ItemDropRule.NotScalingWithLuck(ModContent.ItemType<BulletHell>(), 3);
             default:
