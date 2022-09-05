@@ -11,7 +11,7 @@ public class Capper : ModItem
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.SpaceGun);
-        Item.damage *= 16 / Item.mana * 2;
+        Item.damage *= 24 / Item.mana;
         Item.mana = 16;
         Item.width = 33;
         Item.height = 22;
