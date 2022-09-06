@@ -26,19 +26,30 @@ class DangerlessPlayer : ModPlayer
     public bool enabled;
     public override void ResetEffects()
         => enabled = false;
+    public const byte SPAWN_COOLDOWN = 2;
+    byte spawnTimer = SPAWN_COOLDOWN;
+    public bool ReadyToSpawn => spawnTimer >= SPAWN_COOLDOWN;
+    public override void PostUpdate()
+    {
+        if (enabled && spawnTimer < SPAWN_COOLDOWN)
+            spawnTimer++;
+    }
     public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
     {
         if (!enabled)
             return;
         if (!target.CanBeChasedBy() && target.type != NPCID.TargetDummy)
             return;
+        if (!ReadyToSpawn)
+            return;
         damage = (int)(damage * 1.5f);
         Projectile hostile = Projectile.NewProjectileDirect(Terraria.Entity.InheritSource(proj), target.Center, proj.velocity.RotatedByRandom(0.314f), ModContent.ProjectileType<DangerlessProjectile>(), damage / 4 + 10, knockback / 3, Player.whoAmI);
+        spawnTimer = 0;
     }
     public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
     {
         if (damageSource.SourceProjectileType == ModContent.ProjectileType<DangerlessProjectile>())
-            damageSource = PlayerDeathReason.ByCustomReason($"{Player.name} was dangerless");
+            damageSource = PlayerDeathReason.ByCustomReason($"{Player.name} was too dangerless");
         return base.PreKill(damage, hitDirection, pvp, ref playSound, ref genGore, ref damageSource);
     }
 }
