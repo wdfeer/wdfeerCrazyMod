@@ -4,12 +4,12 @@ namespace wdfeerCrazyMod.Accessories;
 
 internal class ChaosInABottle : ModItem
 {
-    public const float CHAOS_STATE_DURATION_MULT = 0.75f;
-    public const float INCOMING_DAMAGE_MULT = 1.25f;
+    protected virtual float ChaosStateDurationMult => 0.75f;
+    protected virtual float IncomingDamageMult => 1.25f;
     public override void SetStaticDefaults()
     {
         DisplayName.SetDefault("Chaos in a Bottle");
-        Tooltip.SetDefault($"-{(int)(100 - CHAOS_STATE_DURATION_MULT * 100f)}% Chaos State duration\n+{(int)(INCOMING_DAMAGE_MULT * 100f - 100)}% damage taken");
+        Tooltip.SetDefault($"-{(int)(100 - ChaosStateDurationMult * 100f)}% Chaos State duration\n+{(int)(IncomingDamageMult * 100f - 100)}% damage taken");
     }
     public override void SetDefaults()
     {
@@ -21,7 +21,10 @@ internal class ChaosInABottle : ModItem
     }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetModPlayer<ChaosInABottlePlayer>().enabled = true;
+        var modPlayer = player.GetModPlayer<ChaosInABottlePlayer>();
+        modPlayer.enabled = true;
+        modPlayer.chaosStateDurationMult = ChaosStateDurationMult;
+        modPlayer.incomingDamageMult = IncomingDamageMult;
     }
     public override void AddRecipes()
     {
@@ -30,23 +33,39 @@ internal class ChaosInABottle : ModItem
         recipe.AddTile(TileID.MythrilAnvil);
         recipe.Register();
     }
+    public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)
+    {
+        if (equippedItem.ModItem is ChaosInABottle && incomingItem.ModItem is ChaosInABottle)
+            return false;
+        return true;
+    }
 }
 class ChaosInABottlePlayer : ModPlayer
 {
     public bool enabled;
+    public float chaosStateDurationMult;
+    public float incomingDamageMult;
     public override void ResetEffects()
-        => enabled = false;
-    bool chaosModified = false;
-    public override void PostUpdateBuffs()
     {
-        if (Player.HasBuff(BuffID.ChaosState)){
+        enabled = false;
+        chaosStateDurationMult = 1f;
+        incomingDamageMult = 1f;
+    }
+    bool chaosModified = false;
+    public override void PostUpdateEquips()
+    {
+        if (!enabled)
+            return;
+        if (Player.HasBuff(BuffID.ChaosState))
+        {
             if (!chaosModified)
             {
                 ref int buffTime = ref Player.buffTime[Player.FindBuffIndex(BuffID.ChaosState)];
-                buffTime = (int)(buffTime * ChaosInABottle.CHAOS_STATE_DURATION_MULT);
+                buffTime = (int)(buffTime * chaosStateDurationMult);
                 chaosModified = true;
             }
-        } else
+        }
+        else
         {
             chaosModified = false;
         }
@@ -54,7 +73,7 @@ class ChaosInABottlePlayer : ModPlayer
     public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
     {
         if (enabled)
-            damage = (int)(damage * ChaosInABottle.INCOMING_DAMAGE_MULT);
+            damage = (int)(damage * incomingDamageMult);
         return base.PreHurt(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource, ref cooldownCounter);
     }
 }
