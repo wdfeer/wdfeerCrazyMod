@@ -6,7 +6,7 @@ internal class DangerlessAmulet : ModItem
 {
     public override void SetStaticDefaults()
     {
-        Tooltip.SetDefault("+50% Projectile damage\nWhenever you deal damage, spawn homing hostile projectiles");
+        Tooltip.SetDefault("+50% Projectile damage as a separate multiplier\nWhenever you deal damage, spawn homing hostile projectiles");
     }
     public override void SetDefaults()
     {

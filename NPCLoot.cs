@@ -16,6 +16,8 @@ internal class NPCLoot : GlobalNPC
                 return ItemDropRule.Common(ModContent.ItemType<EnchantedUmbrella>(), 14);
             case NPCID.MossHornet or NPCID.BigMossHornet or NPCID.GiantMossHornet or NPCID.TinyMossHornet or NPCID.LittleMossHornet:
                 return ItemDropRule.Common(ModContent.ItemType<PlutoniumAmulet>(), 40);
+            case NPCID.ChaosElemental:
+                return ItemDropRule.Common(ModContent.ItemType<ChaosInABottle>(), 50);
             case NPCID.TheDestroyer or NPCID.SkeletronPrime:
                 return ItemDropRule.NotScalingWithLuck(ModContent.ItemType<DangerlessAmulet>(), 4);
             case NPCID.HallowBoss:
