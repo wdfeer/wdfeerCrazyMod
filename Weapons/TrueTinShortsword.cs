@@ -6,11 +6,11 @@ public class TrueTinShortsword : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.damage = 70;
+		Item.damage = 60;
 		Item.DamageType = DamageClass.Melee;
 		Item.noMelee = true;
 		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.scale = 0;
+		Item.noUseGraphic = true;
 		Item.width = 56;
 		Item.height = 60;
 		Item.useTime = 12;
@@ -28,7 +28,7 @@ public class TrueTinShortsword : ModItem
 		Recipe recipe = CreateRecipe();
 		recipe.AddIngredient(ItemID.EmpressBlade);
 		recipe.AddIngredient(ItemID.TinShortsword);
-		recipe.AddTile(TileID.LunarCraftingStation);
+		recipe.AddTile(TileID.MythrilAnvil);
 		recipe.Register();
 	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -53,11 +53,7 @@ public class TrueTinShortsword : ModItem
 					projectile.timeLeft = (int)(projectile.timeLeft * 256 / d);
 				if (Main.netMode != NetmodeID.SinglePlayer)
 				{
-					ModPacket packet = Mod.GetPacket();
-					packet.Write((byte)MessageType.ProjectileRotation);
-					packet.Write(projectileID);
-					packet.Write(projectile.rotation);
-					packet.Send();
+					(Mod as wdfeerCrazyMod).SyncProjectileRotation(projectile, projectile.rotation);
 				}
 			}
 		}

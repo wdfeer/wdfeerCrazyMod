@@ -11,7 +11,7 @@ public class TrueCopperShortsword : ModItem
 		Item.DamageType = DamageClass.Melee;
 		Item.noMelee = true;
 		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.scale = 0;
+		Item.noUseGraphic = true;
 		Item.width = 56;
 		Item.height = 60;
 		Item.useTime = 13;
@@ -29,7 +29,7 @@ public class TrueCopperShortsword : ModItem
 		Recipe recipe = CreateRecipe();
 		recipe.AddIngredient(ItemID.EmpressBlade);
 		recipe.AddIngredient(ItemID.CopperShortsword);
-		recipe.AddTile(TileID.LunarCraftingStation);
+		recipe.AddTile(TileID.MythrilAnvil);
 		recipe.Register();
 	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -52,11 +52,7 @@ public class TrueCopperShortsword : ModItem
 			projectile.rotation = currentDirrection.ToRotation() + MathHelper.PiOver4;
 			if (Main.netMode != NetmodeID.SinglePlayer)
 			{
-                ModPacket packet = Mod.GetPacket();
-                packet.Write((byte)MessageType.ProjectileRotation);
-                packet.Write(projectileID);
-                packet.Write(projectile.rotation);
-                packet.Send();
+                (Mod as wdfeerCrazyMod).SyncProjectileRotation(projectile, projectile.rotation);
             }
         }
 		return false;

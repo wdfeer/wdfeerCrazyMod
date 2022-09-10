@@ -36,11 +36,7 @@ public class wdfeerCrazyMod : Mod
                 float rotation = reader.ReadSingle();
                 if (Main.netMode == NetmodeID.Server)
                 {
-                    ModPacket packet = GetPacket();
-                    packet.Write((byte)messageType);
-                    packet.Write(projectileID);
-                    packet.Write(rotation);
-                    packet.Send(ignoreClient: whoAmI);
+                    SyncProjectileRotation(projectileID, rotation, whoAmI);
                 }
                 else
                 {
@@ -50,6 +46,16 @@ public class wdfeerCrazyMod : Mod
             default:
                 break;
         }
+    }
+    public void SyncProjectileRotation(Projectile proj, float rotation)
+        => SyncProjectileRotation(proj.whoAmI, rotation);
+    public void SyncProjectileRotation(int proj, float rotation, int ignoreClient = -1)
+    {
+        ModPacket packet = GetPacket();
+        packet.Write((byte)MessageType.ProjectileRotation);
+        packet.Write(proj);
+        packet.Write(rotation);
+        packet.Send(ignoreClient: ignoreClient);
     }
 }
 public enum MessageType
