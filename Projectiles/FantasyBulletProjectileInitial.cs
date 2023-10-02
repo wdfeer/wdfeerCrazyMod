@@ -23,7 +23,7 @@ internal class FantasyBulletProjectileInitial : ModProjectile
         Projectile.rotation = (float)Math.Atan2(Projectile.velocity.Y, Projectile.velocity.X);
     }
     int numOfProjectilesSpawnedOnHit = 6;
-    public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
         Vector2 launchVelocity = new Vector2(10, 0);
         launchVelocity = launchVelocity.RotatedByRandom(MathHelper.Pi);

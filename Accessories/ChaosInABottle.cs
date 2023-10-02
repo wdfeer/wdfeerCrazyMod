@@ -70,10 +70,14 @@ class ChaosInABottlePlayer : ModPlayer
             chaosModified = false;
         }
     }
-    public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
+    public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
     {
         if (enabled)
-            damage = (int)(damage * incomingDamageMult);
-        return base.PreHurt(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource, ref cooldownCounter);
+            modifiers.FinalDamage *= incomingDamageMult;
+    }
+    public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)
+    {
+        if (enabled)
+            modifiers.FinalDamage *= incomingDamageMult;
     }
 }

@@ -39,7 +39,7 @@ public class Starbreak : ModItem
             Vector2 spawnPosition = target.Center + Main.rand.NextVector2CircularEdge(target.width + 240, target.height + 240);
             Vector2 velocity = Vector2.Normalize(target.Center - spawnPosition) * 16;
 
-            int projectileID = Projectile.NewProjectile(Item.GetSource_ItemUse(Item),
+            int projectileID = Projectile.NewProjectile(Item.GetSource_FromThis(),
                                       spawnPosition,
                                       velocity,
                                       ModContent.ProjectileType<Projectiles.StarbreakProjectile>(),

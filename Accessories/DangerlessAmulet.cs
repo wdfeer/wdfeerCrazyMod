@@ -34,7 +34,7 @@ class DangerlessPlayer : ModPlayer
         if (enabled && spawnTimer < SPAWN_COOLDOWN)
             spawnTimer++;
     }
-    public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+    public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
     {
         if (!enabled)
             return;
@@ -42,7 +42,7 @@ class DangerlessPlayer : ModPlayer
             return;
         if (!ReadyToSpawn)
             return;
-        damage = (int)(damage * 1.5f);
+        modifiers.FinalDamage *= 1.5f;
         Projectile hostile = Projectile.NewProjectileDirect(Terraria.Entity.InheritSource(proj), target.Center, proj.velocity.RotatedByRandom(0.314f), ModContent.ProjectileType<DangerlessProjectile>(), damage / 4 + 10, knockback / 3, Player.whoAmI);
         spawnTimer = 0;
     }
@@ -71,7 +71,7 @@ class DangerlessProjectile : ModProjectile
         if (Projectile.timeLeft <= 16)
         {
             Projectile.alpha = Projectile.timeLeft * 16;
-            Projectile.light = Projectile.timeLeft * 0.75f / 16 ;
+            Projectile.light = Projectile.timeLeft * 0.75f / 16;
         }
         if ((Projectile.timeLeft > 45 && Projectile.timeLeft < 90) || target.dead || !target.active)
             return;
