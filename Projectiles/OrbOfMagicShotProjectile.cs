@@ -3,10 +3,6 @@
 internal class OrbOfMagicShotProjectile : ModProjectile
 {
     public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.AmethystBolt;
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Orb of Magic");
-    }
     int dustType;
     Func<float, float> trigonometry;
     public override void SetDefaults()

@@ -4,10 +4,6 @@ namespace wdfeerCrazyMod.Weapons;
 
 public class Capper : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("C.A.P.P.E.R");
-    }
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.SpaceGun);

@@ -3,17 +3,6 @@
 internal class EnchantedBoomerang : ModProjectile
 {
     public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.EnchantedBoomerang;
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Enchanted Boomerang");
-        // This is necessary for right-click targeting
-        ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
-
-        Main.projPet[Projectile.type] = true; // Denotes that this projectile is a pet or minion
-
-        ProjectileID.Sets.MinionSacrificable[Projectile.type] = true; // This is needed so your minion can properly spawn when summoned and replaced when other minions are summoned
-        ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true; // Make the cultist resistant to this projectile, as it's resistant to all homing projectiles.
-    }
     float passiveRotationMultiplier = 1;
     public sealed override void SetDefaults()
     {

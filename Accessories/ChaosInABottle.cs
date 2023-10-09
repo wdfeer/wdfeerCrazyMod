@@ -6,11 +6,6 @@ internal class ChaosInABottle : ModItem
 {
     protected virtual float ChaosStateDurationMult => 0.75f;
     protected virtual float IncomingDamageMult => 1.25f;
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Chaos in a Bottle");
-        Tooltip.SetDefault($"-{(int)(100 - ChaosStateDurationMult * 100f)}% Chaos State duration\n+{(int)(IncomingDamageMult * 100f - 100)}% damage taken");
-    }
     public override void SetDefaults()
     {
         Item.width = 32;

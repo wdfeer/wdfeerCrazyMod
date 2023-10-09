@@ -2,14 +2,6 @@
 
 internal class EnchantedUmbrellaBuff : ModBuff
 {
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Enchanted Umbrella");
-        Description.SetDefault("The enchanted umbrella will protect you");
-
-        Main.buffNoSave[Type] = true; // This buff won't save when you exit the world
-        Main.buffNoTimeDisplay[Type] = true; // The time remaining won't display on this buff
-    }
 
     public override void Update(Player player, ref int buffIndex)
     {

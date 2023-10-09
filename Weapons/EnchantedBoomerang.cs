@@ -6,14 +6,6 @@ namespace wdfeerCrazyMod.Weapons;
 internal class EnchantedBoomerang : ModItem
 {
     public override string Texture => "Terraria/Images/Item_" + ItemID.EnchantedBoomerang;
-    public override void SetStaticDefaults()
-    {
-        Tooltip.SetDefault("Summons an enchanted boomerang to fight for you");
-
-        CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-        ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
-        ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
-    }
 
     public override void SetDefaults()
     {

@@ -4,10 +4,6 @@ namespace wdfeerCrazyMod.Weapons;
 
 public class Multishark : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Tooltip.SetDefault("More shark");
-    }
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.Megashark);

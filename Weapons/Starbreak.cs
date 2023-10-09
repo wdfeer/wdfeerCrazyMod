@@ -4,11 +4,6 @@ namespace wdfeerCrazyMod.Weapons;
 
 public class Starbreak : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Starbreak");
-        Tooltip.SetDefault("Holding this item materialises an interstellar spear, attacking your foes while they are nearby");
-    }
     public override void SetDefaults()
     {
         Item.damage = 101;

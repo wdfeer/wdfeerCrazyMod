@@ -2,10 +2,6 @@
 
 internal class PlutoniumAmulet : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Tooltip.SetDefault("+25% damage dealt\n+25% damage taken");
-    }
     public override void SetDefaults()
     {
         Item.width = 32;

@@ -2,14 +2,6 @@
 
 internal class PossessedUziBuff : ModBuff
 {
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Possessed Uzi");
-        Description.SetDefault("The possessed uzi");
-
-        Main.buffNoSave[Type] = true; // This buff won't save when you exit the world
-        Main.buffNoTimeDisplay[Type] = true; // The time remaining won't display on this buff
-    }
 
     public override void Update(Player player, ref int buffIndex)
     {

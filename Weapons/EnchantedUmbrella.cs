@@ -5,14 +5,6 @@ namespace wdfeerCrazyMod.Weapons;
 
 internal class EnchantedUmbrella : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Tooltip.SetDefault("Summons an enchanted umbrella to protect you and throw itself at a nearby enemy\nDoesn't consume minion slots\nUp to three umbrellas can be active at once\nEach umbrella provides 5 defense");
-
-        CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-        ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
-        ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
-    }
 
     public override void SetDefaults()
     {

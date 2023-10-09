@@ -5,10 +5,6 @@ namespace wdfeerCrazyMod.Weapons;
 
 internal class Autobow : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Tooltip.SetDefault("Throws a bow that shoots at enemies rapidly while it flies\nArrows deal 50% of the damage");
-    }
 
     public override void SetDefaults()
     {

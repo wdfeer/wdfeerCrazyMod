@@ -3,10 +3,6 @@
 internal class TrueTinShortswordProjectile : TrueCopperShortswordProjectile
 {
     public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.TinShortswordStab;
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Tin Shortsword");
-    }
     public override void SetDefaults()
     {
         baseTimeLeft = 9;

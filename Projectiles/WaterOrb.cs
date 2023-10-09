@@ -2,11 +2,6 @@
 
 internal class WaterOrb : ModProjectile
 {
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Water Orb");
-        Main.projFrames[Projectile.type] = 2;
-    }
     public override void SetDefaults()
     {
         Projectile.DamageType = DamageClass.Magic;

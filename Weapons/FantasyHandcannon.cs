@@ -5,10 +5,6 @@ namespace wdfeerCrazyMod.Weapons;
 
 public class FantasyHandcannon : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Tooltip.SetDefault("Shoots fantasy bullets\nSuccessful hits spawn a swarm of fantasy bullets, each dealing 40% damage");
-    }
     public override void SetDefaults()
     {
         Item.damage = 88;

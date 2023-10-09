@@ -6,10 +6,6 @@ namespace wdfeerCrazyMod.Projectiles;
 internal class AutobowProjectile : ModProjectile
 {
     public override string Texture => "wdfeerCrazyMod/Weapons/Autobow";
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Autobow");
-    }
     int baseTimeLeft = 0;
     public override void SetDefaults()
     {

@@ -4,14 +4,6 @@ internal class EnchantedUmbrella : ModProjectile
 {
     public override string Texture => "wdfeerCrazyMod/Weapons/EnchantedUmbrella";
     public bool launched = false;
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Enchanted Umbrella");
-        // This is necessary for right-click targeting
-        ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
-
-        ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true; // Make the cultist resistant to this projectile, as it's resistant to all homing projectiles.
-    }
     public sealed override void SetDefaults()
     {
         Projectile.width = 18;

@@ -2,10 +2,6 @@
 
 internal class StarbreakProjectile : ModProjectile
 {
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Starbreak");
-    }
     public override void SetDefaults()
     {
         Projectile.DamageType = DamageClass.Summon;

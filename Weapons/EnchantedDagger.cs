@@ -2,10 +2,6 @@ namespace wdfeerCrazyMod.Weapons;
 
 public class EnchantedDagger : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Tooltip.SetDefault("Throws a magic enchanted dagger that homes in on your foes, kinda");
-    }
     public override void SetDefaults()
     {
         Item.damage = 39;

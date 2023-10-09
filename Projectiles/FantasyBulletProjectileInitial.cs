@@ -3,10 +3,6 @@
 internal class FantasyBulletProjectileInitial : ModProjectile
 {
     public override string Texture => "wdfeerCrazyMod/Projectiles/FantasyBulletProjectile";
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Fantasy Bullet");
-    }
     public override void SetDefaults()
     {
         Projectile.width = 20;
