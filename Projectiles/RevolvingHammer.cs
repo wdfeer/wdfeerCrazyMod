@@ -5,14 +5,6 @@ namespace wdfeerCrazyMod.Projectiles;
 internal class RevolvingHammer : ModProjectile
 {
     public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.PaladinsHammerFriendly;
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Revolving Hammer");
-        // This is necessary for right-click targeting
-        ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
-
-        ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true; // Make the cultist resistant to this projectile, as it's resistant to all homing projectiles.
-    }
     public sealed override void SetDefaults()
     {
         Projectile.width = 38;

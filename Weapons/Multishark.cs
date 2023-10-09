@@ -1,13 +1,10 @@
 using Terraria.DataStructures;
+using Terraria.Localization;
 
 namespace wdfeerCrazyMod.Weapons;
 
 public class Multishark : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Tooltip.SetDefault("More shark");
-    }
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.Megashark);
@@ -22,7 +19,7 @@ public class Multishark : ModItem
         recipe.AddIngredient(ItemID.Megashark);
         recipe.AddIngredient(ItemID.SoulofLight, 9);
         recipe.AddIngredient(ItemID.SoulofNight, 9);
-        recipe.AddCondition(Terraria.Localization.NetworkText.Empty, (recipe) => NPC.downedEmpressOfLight);
+        recipe.AddCondition(LocalizedText.Empty, () => NPC.downedEmpressOfLight);
         recipe.AddTile(TileID.MythrilAnvil);
         recipe.Register();
     }

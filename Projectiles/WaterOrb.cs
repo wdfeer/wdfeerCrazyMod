@@ -2,11 +2,6 @@
 
 internal class WaterOrb : ModProjectile
 {
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Water Orb");
-        Main.projFrames[Projectile.type] = 2;
-    }
     public override void SetDefaults()
     {
         Projectile.DamageType = DamageClass.Magic;
@@ -46,11 +41,11 @@ internal class WaterOrb : ModProjectile
             Projectile.frame = 0;
         }
     }
-    public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+    public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
     {
         float powerModifier = Projectile.velocity.Length() * (Projectile.extraUpdates + 1) / 16;
-        damage = (int)(damage * powerModifier);
-        knockback = (int)(knockback * powerModifier);
+        modifiers.FinalDamage *= powerModifier;
+        modifiers.Knockback *= powerModifier;
     }
     public override void Kill(int timeLeft)
     {

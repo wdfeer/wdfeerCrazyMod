@@ -4,10 +4,6 @@ internal class CopperShortswordMouseControlled : ModProjectile
 {
     public float speed = 8f;
     public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.CopperShortswordStab;
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("CopperShortsword");
-    }
     public override void SetDefaults()
     {
         Projectile.DamageType = DamageClass.Summon;

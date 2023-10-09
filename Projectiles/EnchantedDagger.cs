@@ -5,10 +5,6 @@ namespace wdfeerCrazyMod.Projectiles;
 internal class EnchantedDagger : ModProjectile
 {
     public override string Texture => "wdfeerCrazyMod/Weapons/EnchantedDagger";
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Enchanted Dagger");
-    }
     int baseTimeLeft = 0;
     public override void SetDefaults()
     {
@@ -40,7 +36,7 @@ internal class EnchantedDagger : ModProjectile
             return potentialTarget.Center;
         return Vector2.Zero;
     }
-    public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
         Projectile.timeLeft = baseTimeLeft;
     }

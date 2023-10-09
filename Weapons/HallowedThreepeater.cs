@@ -4,10 +4,6 @@ namespace wdfeerCrazyMod.Weapons;
 
 public class HallowedThreepeater : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Tooltip.SetDefault("");
-    }
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.HallowedRepeater);

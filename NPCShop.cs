@@ -4,12 +4,11 @@ namespace wdfeerCrazyMod;
 
 internal class NPCShop : GlobalNPC
 {
-    public override void SetupShop(int type, Chest shop, ref int nextSlot)
+    public override void ModifyShop(Terraria.ModLoader.NPCShop shop)
     {
-        if (type == NPCID.Steampunker)
+        if (shop.NpcType == NPCID.Steampunker)
         {
-            shop.item[nextSlot].SetDefaults(ModContent.ItemType<Autobow>());
-            nextSlot++;
+            shop.Add(ModContent.ItemType<Autobow>());
         }
     }
 }

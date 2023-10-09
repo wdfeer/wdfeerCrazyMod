@@ -2,14 +2,6 @@
 
 internal class EnchantedBoomerangBuff : ModBuff
 {
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Enchanted Boomerang");
-        Description.SetDefault("The enchanted boomerang will fight for you");
-
-        Main.buffNoSave[Type] = true; // This buff won't save when you exit the world
-        Main.buffNoTimeDisplay[Type] = true; // The time remaining won't display on this buff
-    }
 
     public override void Update(Player player, ref int buffIndex)
     {

@@ -2,10 +2,6 @@
 
 internal class StarbreakProjectile : ModProjectile
 {
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Starbreak");
-    }
     public override void SetDefaults()
     {
         Projectile.DamageType = DamageClass.Summon;
@@ -21,7 +17,7 @@ internal class StarbreakProjectile : ModProjectile
     {
         Projectile.rotation = (float)Math.Atan2(Projectile.velocity.Y, Projectile.velocity.X) + MathHelper.PiOver2;
     }
-    public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+    public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
         Projectile.timeLeft = 1;
     }

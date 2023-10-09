@@ -4,10 +4,6 @@ namespace wdfeerCrazyMod.Weapons;
 
 public class WaterOrb : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Tooltip.SetDefault("Casts orbs of water on your enemies\nThey accelerate over time, increasing their damage but draining mana");
-    }
     public override void SetDefaults()
     {
         Item.damage = 10;

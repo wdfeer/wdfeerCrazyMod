@@ -6,11 +6,6 @@ internal class ChaosInABottle : ModItem
 {
     protected virtual float ChaosStateDurationMult => 0.75f;
     protected virtual float IncomingDamageMult => 1.25f;
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Chaos in a Bottle");
-        Tooltip.SetDefault($"-{(int)(100 - ChaosStateDurationMult * 100f)}% Chaos State duration\n+{(int)(IncomingDamageMult * 100f - 100)}% damage taken");
-    }
     public override void SetDefaults()
     {
         Item.width = 32;
@@ -70,10 +65,14 @@ class ChaosInABottlePlayer : ModPlayer
             chaosModified = false;
         }
     }
-    public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
+    public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
     {
         if (enabled)
-            damage = (int)(damage * incomingDamageMult);
-        return base.PreHurt(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource, ref cooldownCounter);
+            modifiers.FinalDamage *= incomingDamageMult;
+    }
+    public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)
+    {
+        if (enabled)
+            modifiers.FinalDamage *= incomingDamageMult;
     }
 }

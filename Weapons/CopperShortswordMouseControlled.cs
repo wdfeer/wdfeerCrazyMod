@@ -3,11 +3,6 @@ namespace wdfeerCrazyMod.Weapons;
 public class CopperShortswordMouseControlled : ModItem
 {
     public override string Texture => "Terraria/Images/Item_" + ItemID.CopperShortsword;
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Copper Shortsword");
-        Tooltip.SetDefault("Holding this item summons a Copper Shortsword, which follows your cursor around");
-    }
     public override void SetDefaults()
     {
         Item.damage = 19;
@@ -38,7 +33,7 @@ public class CopperShortswordMouseControlled : ModItem
             return;
         if (projectile == null || !projectile.active || projectile.type != ModContent.ProjectileType<Projectiles.CopperShortswordMouseControlled>() || projectile.owner != player.whoAmI)
         {
-            int projectileID = Projectile.NewProjectile(Item.GetSource_ItemUse(Item),
+            int projectileID = Projectile.NewProjectile(Item.GetSource_FromThis(),
                                   Main.MouseWorld,
                                   Vector2.Zero,
                                   ModContent.ProjectileType<Projectiles.CopperShortswordMouseControlled>(),

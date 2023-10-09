@@ -5,10 +5,6 @@ namespace wdfeerCrazyMod.Weapons;
 
 public class TomeOfCopperShortswords : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Tooltip.SetDefault("Number of Copper Shortswords and their damage increases after defeating EoC, BoC or Eoc, Skeletron");
-    }
     public override void SetDefaults()
     {
         Item.damage = 5;

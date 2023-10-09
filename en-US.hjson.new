@@ -1,0 +1,197 @@
+
+Mods: {
+	wdfeerCrazyMod: {
+		Items: {
+			ChaosInABalloon: {
+				DisplayName: Chaos in a Balloon
+				Tooltip:
+					'''
+					-33% Chaos State duration
+					Increases jump height
+					+40% damage taken
+					'''
+			}
+
+			ChaosInABottle: {
+				DisplayName: Chaos in a Bottle
+				Tooltip:
+					'''
+					-25% Chaos State duration
+					+25% damage taken
+					'''
+			}
+
+			DangerlessAmulet: {
+				DisplayName: Dangerless Amulet
+				Tooltip:
+					'''
+					+50% Projectile damage as a separate multiplier
+					Whenever you deal damage, spawn homing hostile projectiles
+					'''
+			}
+
+			PlutoniumAmulet: {
+				DisplayName: Plutonium Amulet
+				Tooltip:
+					'''
+					+25% damage dealt
+					+25% damage taken
+					'''
+			}
+
+			Autobow: {
+				DisplayName: Autobow
+				Tooltip:
+					'''
+					Throws a bow that shoots at enemies rapidly while it flies
+					Arrows deal 50% of the damage
+					'''
+			}
+
+			BulletHell: {
+				DisplayName: Bullet Hell
+				Tooltip:
+					'''
+					Spawns an array of projectiles around you
+					Has three types of attacks
+					'''
+			}
+
+			Capper.DisplayName: C.A.P.P.E.R
+
+			CopperShortswordMouseControlled: {
+				DisplayName: Copper Shortsword
+				Tooltip: Holding this item summons a Copper Shortsword, which follows your cursor around
+			}
+
+			EnchantedBoomerang: {
+				DisplayName: Enchanted Boomerang
+				Tooltip: Summons an enchanted boomerang to fight for you
+			}
+
+			EnchantedDagger: {
+				DisplayName: Enchanted Dagger
+				Tooltip: Throws a magic enchanted dagger that homes in on your foes, kinda
+			}
+
+			EnchantedUmbrella: {
+				DisplayName: Enchanted Umbrella
+				Tooltip:
+					'''
+					Summons an enchanted umbrella to protect you and throw itself at a nearby enemy
+					Doesn't consume minion slots
+					Up to three umbrellas can be active at once
+					Each umbrella provides 5 defense
+					'''
+			}
+
+			FantasyHandcannon: {
+				DisplayName: Fantasy Handcannon
+				Tooltip:
+					'''
+					Shoots fantasy bullets
+					Successful hits spawn a swarm of fantasy bullets, each dealing 40% damage
+					'''
+			}
+
+			HallowedThreepeater.DisplayName: Hallowed Threepeater
+
+			Multishark: {
+				DisplayName: Multishark
+				Tooltip: More shark
+			}
+
+			OrbOfMagic: {
+				DisplayName: Orb Of Magic
+				Tooltip: Summons an orb of magic to fight for you
+			}
+
+			PossessedUzi: {
+				DisplayName: Possessed Uzi
+				Tooltip:
+					'''
+					Summons a possessed uzi to fight for you
+					Requires 2.5 minion slots
+					'''
+			}
+
+			RevolvingHammer: {
+				DisplayName: Revolving Hammer
+				Tooltip: Summons a Paladin's hammer to revolve around you at insane speeds
+			}
+
+			Starbreak: {
+				DisplayName: Starbreak
+				Tooltip: Holding this item materialises an interstellar spear, attacking your foes while they are nearby
+			}
+
+			TomeOfCopperShortswords: {
+				DisplayName: Tome Of Copper Shortswords
+				Tooltip: Number of Copper Shortswords and their damage increases after defeating EoC, BoC or Eoc, Skeletron
+			}
+
+			TrueCopperShortsword.DisplayName: True Copper Shortsword
+			TrueTinShortsword.DisplayName: True Tin Shortsword
+
+			WaterOrb: {
+				DisplayName: Water Orb
+				Tooltip:
+					'''
+					Casts orbs of water on your enemies
+					They accelerate over time, increasing their damage but draining mana
+					'''
+			}
+		}
+
+		Projectiles: {
+			DangerlessProjectile.DisplayName: Dangerless Projectile
+			AutobowProjectile.DisplayName: Autobow
+			BulletHellProjectile.DisplayName: Bullet Hell Projectile
+			BulletHellProjectile1.DisplayName: Bullet Hell Projectile1
+			BulletHellProjectile2.DisplayName: Bullet Hell Projectile2
+			BulletHellProjectile3.DisplayName: Bullet Hell Projectile3
+			CopperShortswordMouseControlled.DisplayName: CopperShortsword
+			CopperShortswordTomeSword.DisplayName: CopperShortsword
+			EnchantedBoomerang.DisplayName: Enchanted Boomerang
+			EnchantedDagger.DisplayName: Enchanted Dagger
+			EnchantedUmbrella.DisplayName: Enchanted Umbrella
+			FantasyBulletProjectileInitial.DisplayName: Fantasy Bullet
+			FantasyBulletProjectileSecond.DisplayName: Fantasy Bullet
+			OrbOfMagic.DisplayName: Orb of Magic
+			OrbOfMagicShotProjectile.DisplayName: Orb of Magic
+			PossessedUziProjectile.DisplayName: Possessed Uzi
+			RevolvingHammer.DisplayName: Revolving Hammer
+			StarbreakProjectile.DisplayName: Starbreak
+			TrueCopperShortswordProjectile.DisplayName: Copper Shortsword
+			TrueTinShortswordProjectile.DisplayName: Tin Shortsword
+			WaterOrb.DisplayName: Water Orb
+		}
+
+		Buffs: {
+			EnchantedBoomerangBuff: {
+				DisplayName: Enchanted Boomerang
+				Description: The enchanted boomerang will fight for you
+			}
+
+			EnchantedUmbrellaBuff: {
+				DisplayName: Enchanted Umbrella
+				Description: The enchanted umbrella will protect you
+			}
+
+			OrbOfMagicBuff: {
+				DisplayName: Orb of magic
+				Description: Truly... magical
+			}
+
+			PossessedUziBuff: {
+				DisplayName: Possessed Uzi
+				Description: The possessed uzi
+			}
+
+			RevolvingHammerBuff: {
+				DisplayName: Revolving Hammer
+				Description: The hammer, that revolves
+			}
+		}
+	}
+}

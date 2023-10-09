@@ -4,10 +4,6 @@ namespace wdfeerCrazyMod.Accessories;
 
 internal class DangerlessAmulet : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Tooltip.SetDefault("+50% Projectile damage as a separate multiplier\nWhenever you deal damage, spawn homing hostile projectiles");
-    }
     public override void SetDefaults()
     {
         Item.width = 32;
@@ -34,7 +30,7 @@ class DangerlessPlayer : ModPlayer
         if (enabled && spawnTimer < SPAWN_COOLDOWN)
             spawnTimer++;
     }
-    public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+    public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
     {
         if (!enabled)
             return;
@@ -42,8 +38,15 @@ class DangerlessPlayer : ModPlayer
             return;
         if (!ReadyToSpawn)
             return;
-        damage = (int)(damage * 1.5f);
-        Projectile hostile = Projectile.NewProjectileDirect(Terraria.Entity.InheritSource(proj), target.Center, proj.velocity.RotatedByRandom(0.314f), ModContent.ProjectileType<DangerlessProjectile>(), damage / 4 + 10, knockback / 3, Player.whoAmI);
+        modifiers.FinalDamage *= 1.5f;
+        Projectile hostile = Projectile.NewProjectileDirect(
+            Terraria.Entity.InheritSource(proj),
+            target.Center,
+            proj.velocity.RotatedByRandom(0.314f),
+            ModContent.ProjectileType<DangerlessProjectile>(),
+            proj.damage / 4 + 10,
+            proj.knockBack / 3,
+            Player.whoAmI);
         spawnTimer = 0;
     }
     public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
@@ -71,7 +74,7 @@ class DangerlessProjectile : ModProjectile
         if (Projectile.timeLeft <= 16)
         {
             Projectile.alpha = Projectile.timeLeft * 16;
-            Projectile.light = Projectile.timeLeft * 0.75f / 16 ;
+            Projectile.light = Projectile.timeLeft * 0.75f / 16;
         }
         if ((Projectile.timeLeft > 45 && Projectile.timeLeft < 90) || target.dead || !target.active)
             return;

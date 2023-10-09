@@ -3,10 +3,6 @@
 internal class TrueCopperShortswordProjectile : ModProjectile
 {
     public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.CopperShortswordStab;
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Copper Shortsword");
-    }
     protected int baseTimeLeft = 15;
     public override void SetDefaults()
     {

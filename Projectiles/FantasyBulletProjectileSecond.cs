@@ -6,10 +6,6 @@ internal class FantasyBulletProjectileSecond : ModProjectile
 {
     public NPC target;
     public override string Texture => "wdfeerCrazyMod/Projectiles/FantasyBulletProjectile";
-    public override void SetStaticDefaults()
-    {
-        DisplayName.SetDefault("Fantasy Bullet");
-    }
     public override void SetDefaults()
     {
         Projectile.CloneDefaults(ModContent.ProjectileType<FantasyBulletProjectileInitial>());

@@ -5,10 +5,6 @@ using wdfeerCrazyMod.Projectiles;
 namespace wdfeerCrazyMod.Weapons;
 internal class BulletHell : ModItem
 {
-    public override void SetStaticDefaults()
-    {
-        Tooltip.SetDefault("Spawns an array of projectiles around you\nHas three types of attacks");
-    }
     public override void SetDefaults()
     {
         Item.damage = 160;
