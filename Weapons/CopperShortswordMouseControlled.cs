@@ -33,7 +33,7 @@ public class CopperShortswordMouseControlled : ModItem
             return;
         if (projectile == null || !projectile.active || projectile.type != ModContent.ProjectileType<Projectiles.CopperShortswordMouseControlled>() || projectile.owner != player.whoAmI)
         {
-            int projectileID = Projectile.NewProjectile(Item.GetSource_ItemUse(Item),
+            int projectileID = Projectile.NewProjectile(Item.GetSource_FromThis(),
                                   Main.MouseWorld,
                                   Vector2.Zero,
                                   ModContent.ProjectileType<Projectiles.CopperShortswordMouseControlled>(),

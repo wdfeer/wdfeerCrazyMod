@@ -39,7 +39,14 @@ class DangerlessPlayer : ModPlayer
         if (!ReadyToSpawn)
             return;
         modifiers.FinalDamage *= 1.5f;
-        Projectile hostile = Projectile.NewProjectileDirect(Terraria.Entity.InheritSource(proj), target.Center, proj.velocity.RotatedByRandom(0.314f), ModContent.ProjectileType<DangerlessProjectile>(), damage / 4 + 10, knockback / 3, Player.whoAmI);
+        Projectile hostile = Projectile.NewProjectileDirect(
+            Terraria.Entity.InheritSource(proj),
+            target.Center,
+            proj.velocity.RotatedByRandom(0.314f),
+            ModContent.ProjectileType<DangerlessProjectile>(),
+            proj.damage / 4 + 10,
+            proj.knockBack / 3,
+            Player.whoAmI);
         spawnTimer = 0;
     }
     public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
