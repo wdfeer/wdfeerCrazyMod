@@ -1,4 +1,3 @@
-
 Mods: {
 	wdfeerCrazyMod: {
 		Items: {
@@ -57,7 +56,10 @@ Mods: {
 					'''
 			}
 
-			Capper.DisplayName: C.A.P.P.E.R
+			Capper: {
+				DisplayName: C.A.P.P.E.R
+				Tooltip: ""
+			}
 
 			CopperShortswordMouseControlled: {
 				DisplayName: Copper Shortsword
@@ -94,7 +96,10 @@ Mods: {
 					'''
 			}
 
-			HallowedThreepeater.DisplayName: Hallowed Threepeater
+			HallowedThreepeater: {
+				DisplayName: Hallowed Threepeater
+				Tooltip: ""
+			}
 
 			Multishark: {
 				DisplayName: Multishark
@@ -130,8 +135,15 @@ Mods: {
 				Tooltip: Number of Copper Shortswords and their damage increases after defeating EoC, BoC or Eoc, Skeletron
 			}
 
-			TrueCopperShortsword.DisplayName: True Copper Shortsword
-			TrueTinShortsword.DisplayName: True Tin Shortsword
+			TrueCopperShortsword: {
+				DisplayName: True Copper Shortsword
+				Tooltip: ""
+			}
+
+			TrueTinShortsword: {
+				DisplayName: True Tin Shortsword
+				Tooltip: ""
+			}
 
 			WaterOrb: {
 				DisplayName: Water Orb
