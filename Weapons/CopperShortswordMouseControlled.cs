@@ -26,11 +26,12 @@ public class CopperShortswordMouseControlled : ModItem
         recipe.AddTile(TileID.Anvils);
         recipe.Register();
     }
-    Projectile projectile;
+    static Projectile[] projectiles = new Projectile[255];
     public override void HoldItem(Player player)
     {
         if (Main.myPlayer != player.whoAmI)
             return;
+        var projectile = projectiles[player.whoAmI];
         if (projectile == null || !projectile.active || projectile.type != ModContent.ProjectileType<Projectiles.CopperShortswordMouseControlled>() || projectile.owner != player.whoAmI)
         {
             int projectileID = Projectile.NewProjectile(Item.GetSource_FromThis(),
@@ -40,7 +41,7 @@ public class CopperShortswordMouseControlled : ModItem
                                   Item.damage,
                                   Item.knockBack,
                                       player.whoAmI);
-            projectile = Main.projectile[projectileID];
+            projectiles[player.whoAmI] = Main.projectile[projectileID];
         }
     }
 }
